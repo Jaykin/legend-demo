@@ -1,0 +1,3 @@
+<view wx:if="{{switch && extConfig.switch}}" data-tt="{{extConfig.switch ? 'ss' : 'tt'}}">
+    test
+</view>
