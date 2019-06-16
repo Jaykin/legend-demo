@@ -36,8 +36,8 @@ thumbs.db
 .svn  
 .CVS  
 .idea  
-node_modules/  
-jscoverage_lib/  
-bower_components/  
+node_modules/
+jscoverage_lib/ 
+bower_components/
 dist/
 package-lock.json
