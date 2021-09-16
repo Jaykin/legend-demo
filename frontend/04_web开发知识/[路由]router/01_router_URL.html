@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_router_URL</title>
+</head>
+<body>
+    <script>
+        // 创建 URL 对象
+        let addr = new URL("https://developer.mozilla.org/en-US/docs/Web/API/URL_API?a=1&b=3#sss");
+        let addr2 = new URL("./ss/sddd?d=1&e=3#eee", "http://www.example.com/dogs/");
+
+        // 访问 URL 属性
+        // console.log(addr, addr.hostname, addr.searchParams.getAll('a'));
+        // console.log('addr2: ', addr2);
+
+        // 操作 URL
+        addr.searchParams.append('jay', 'hi');
+        addr.searchParams.delete('a');
+        addr.username = 'JAY';
+        addr.password = 'VIVIAN';
+        console.log(addr);
+
+        // console.log("toString(): ", addr.toString()); // https://developer.mozilla.org/en-US/docs/Web/API/URL_API?a=1&b=3#sss
+        // console.log("toJSON(): ", addr.toJSON()); // https://developer.mozilla.org/en-US/docs/Web/API/URL_API?a=1&b=3#sss
+    </script>
+</body>
+</html>

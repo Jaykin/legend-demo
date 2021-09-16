@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_vue_router</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="$route.name != '404'" class="nav">
+            <!-- 路由导航，默认渲染成 a 标签 -->
+            <router-link to="/">Home</router-link>
+            <router-link to="/foo">Foo</router-link>
+            <router-link to="/bar">Bar</router-link>
+            <router-link to="/user/jay">User</router-link>
+            <router-link to="/product">Product</router-link>
+            <router-link to="/asynca">AsyncA</router-link>
+        </div>
+
+        <!-- 路由出口，匹配的组件在此渲染 -->
+        <router-view></router-view>
+    </div>
+
+    <script name="组件">
+        // 普通路由组件
+        const Home = { template: `<div class="home">Home</div>` };
+        const Foo = { template: `<div class="foo">Foo</div>` };
+        const Bar = { template: `<div class="bar">Bar</div>` };
+
+        // 动态路由组件
+        const User = {
+            template: `<div>User {{ $route.params.id }}</div>`,
+            watch: {
+                $route(to, from) {
+                    // 监听路由变化1
+                    console.log('监听路由变化1: ', from, to);
+                }
+            },
+            beforeRouteUpdate(to, from, next) {
+                // 监听路由变化2（优先执行）
+                console.log('监听路由变化2: ', from, to);
+                next();
+            }
+        }
+
+        // 嵌套路由 & 命名视图组件
+        const Product = {
+            template: `
+                <div>
+                    <h4>product page</h4>
+                    <router-view></router-view>
+                    <router-view name="homeA"></router-view>
+                    <router-view name="homeB"></router-view>
+                </div>
+            `
+        }
+        const ProductHome = {
+            template: `<div>product home!</div>`
+        }
+        const ProductHomeA = {
+            template: `<div>product home A!</div>`
+        }
+        const ProductHomeB = {
+            template: `<div>product home B!</div>`
+        }
+        const ProductDetail = {
+            template: `<div>product detail!</div>`
+        }
+        const ProductIntro = {
+            template: `<div>product intro!</div>`
+        }
+
+        // 异步组件(会被缓存)
+        const AsyncA = function () {
+            return {
+                component: new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve({
+                            template: `<div>Async A!</div>`,
+                        });
+                    }, 2000);
+                }),
+                loading: { template: '<div>Loading</div>' }, // vue-router 不支持 loading，故用同步组件包裹异步组件
+                error: { template: '<div>Error!</div>' },
+                timeout: 3000
+            };
+        }
+        const AsyncAndLoading = {
+            template: `<async-a></async-a>`,
+            components: {
+                AsyncA: AsyncA
+            }
+        }
+
+        // 缺省路由组件 404
+        const NotFound = { template: `<div>Page Not Found! {{ $route.name }}</div>` }
+    </script>
+
+    <script name="router 设置">
+        // 路由配置（path 映射 组件）
+        const routes = [
+            // 普通路由
+            { path: '/', component: Home },
+            { path: '/foo', component: Foo },
+            { path: '/bar', component: Bar },
+            // 动态路由
+            { path: '/user/:id', component: User },
+            // 嵌套路由 & 命名视图
+            { path: '/product', component: Product, children: [
+                {
+                    path: '',
+                    components: {
+                        default: ProductHome,
+                        homeA: ProductHomeA,
+                        homeB: ProductHomeB
+                    }
+                },
+                {
+                    path: 'detail',
+                    components: {
+                        default: ProductDetail,
+                        homeA: ProductHomeA
+                    }
+                },
+                {
+                    path: 'intro',
+                    component: ProductIntro
+                }
+            ] },
+            // 懒加载路由
+            { path: '/asynca', component: AsyncAndLoading },
+            // 缺省路由 & 命名路由
+            { name: '404', path: '*', component: NotFound },
+        ];
+
+        // 创建 router 实例
+        const router = new VueRouter({
+            // mode: 'abstract',
+            mode: 'hash',
+            routes: routes
+        });
+    </script>
+
+    <script>
+        // 创建 Vue 根实例，并挂载至 DOM
+        const app = new Vue({
+            router              // 为VueRouter 插件自定义的 options
+        }).$mount('#app');
+    </script>
+</body>
+</html>

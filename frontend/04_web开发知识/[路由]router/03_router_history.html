@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_router_history</title>
+</head>
+<body>
+    <div>
+        <button id="pushState">pushState</button>
+        <button id="replaceState">replaceState</button>
+    </div>
+    <script>
+        // console.log('History: ', window.history);
+
+        document.querySelector('#pushState').addEventListener('click', function () {
+            let stateObj = Object.create(null);
+            stateObj.A = 1;
+
+            history.pushState(stateObj, 'Page 1', '01_router_URL.html');
+        });
+
+        document.querySelector('#replaceState').addEventListener('click', function () {
+            let stateObj = Object.create(null);
+            stateObj.B = 2;
+
+            history.replaceState(stateObj, 'Page 2', '02_router_location.html');
+        });
+    </script>
+</body>
+</html>

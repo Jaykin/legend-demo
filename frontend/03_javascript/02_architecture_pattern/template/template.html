@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ name }}</p>
+        <p>{{ age }}</p>
+    </div>
+    <script src="./template.js"></script>
+    <script>
+        setTimeout(function () {
+            new TemplateDOM({
+                el: '#app',
+                data: {
+                    name: 'Jay',
+                    age: 18
+                }
+            })
+        }, 500)
+    </script>
+</body>
+</html>

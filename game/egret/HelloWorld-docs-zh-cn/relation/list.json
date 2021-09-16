@@ -1,0 +1,21 @@
+{
+	"api": {
+		"class": [
+			"DebugPlatform",
+			"LoadingUI",
+			"Main"
+		],
+		"interface": [
+			"Platform",
+			"Window"
+		],
+		"globalMember": [
+			"window.globalMember"
+		]
+	},
+	"other": {
+		"class": [
+			"global.Types"
+		]
+	}
+}

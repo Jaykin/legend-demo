@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React-init</title>
+    <!-- React、ReactDOM -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- 运行时编译 JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // ============================ 纯 JS 组件 ============================
+        // const createEle = React.createElement;
+
+        // class LikeButton extends React.Component {
+        //     constructor(props) {
+        //         super(props);
+        //         this.state = { liked: false };
+        //     }
+
+        //     render() {
+        //         if (this.state.liked) {
+        //             return 'You liked this.';
+        //         }
+
+        //         return createEle(
+        //             'button',
+        //             { onClick: () => this.setState({ liked: true }) },
+        //             'Like'
+        //         );
+        //     }
+        // }
+        // ReactDOM.render(createEle(LikeButton), document.querySelector('#app'));
+
+        // ============================ jsx 组件 ============================
+        class CountButton extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { count: 0 };
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={() => this.setState({ count: ++this.state.count }) }>
+                            { this.state.count }
+                        </button>
+
+                        <ul>
+                            {Array(3000).fill(0).map((_, i) => <li>{i}</li>)}
+                        </ul>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<CountButton />, document.querySelector('#app'));
+    </script>
+</body>
+</html>

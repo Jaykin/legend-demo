@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout - Legacy Grid</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1、固定宽度网格(12列) -->
+    <style>
+        .grid1 {
+            padding: 0 10rpx;
+            /* 960 / 12 = 80 */
+            width: 980px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .grid1 .row {
+            clear: both;
+        }
+
+        .grid1 .col {
+            float: left;
+            margin-left: 20px;
+            width: 60px;
+            background: rgb(255, 150, 150);
+        }
+
+        .grid1 .col.span2 { width: 140px; }
+        .grid1 .col.span3 { width: 220px; }
+        .grid1 .col.span4 { width: 300px; }
+        .grid1 .col.span5 { width: 380px; }
+        .grid1 .col.span6 { width: 460px; }
+        .grid1 .col.span7 { width: 540px; }
+        .grid1 .col.span8 { width: 620px; }
+        .grid1 .col.span9 { width: 700px; }
+        .grid1 .col.span10 { width: 780px; }
+        .grid1 .col.span11 { width: 860px; }
+        .grid1 .col.span12 { width: 940px; }
+    </style>
+    <div class="grid1">
+        <h1>1、固定宽度网格(12列)</h1>
+        <div class="wrapper">
+            <div class="row">
+              <div class="col">1</div>
+              <div class="col">2</div>
+              <div class="col">3</div>
+              <div class="col">4</div>
+              <div class="col">5</div>
+              <div class="col">6</div>
+              <div class="col">7</div>
+              <div class="col">8</div>
+              <div class="col">9</div>
+              <div class="col">10</div>
+              <div class="col">11</div>
+              <div class="col">12</div>
+            </div>
+            <div class="row">
+              <div class="col span1">13</div>
+              <div class="col span6">14</div>
+              <div class="col span3">15</div>
+              <div class="col span2">16</div>
+            </div>
+
+            <div class="row"></div>
+          </div>
+    </div>
+
+    <!-- 2、弹性网格 -->
+    <style>
+        .grid2 {
+            width: 90%;
+            /* 960 / 12 = 80 */
+            max-width: 980px;
+            padding: 0 10rpx;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .grid2 .row {
+            clear: both;
+        }
+
+        .grid2 .col {
+            float: left;
+            /* 60 / 960 = 6.25% */
+            width: 6.25%;
+            /* 20 / 960 = 2.08333333% */
+            margin-left: 2.08333333%;
+            background: rgb(255, 150, 150);
+        }
+
+        .grid2 .col.span2 { width: 14.58333333%; }
+        .grid2 .col.span3 { width: 22.91666666%; }
+        .grid2 .col.span4 { width: 31.24999999%; }
+        .grid2 .col.span5 { width: 39.58333332%; }
+        .grid2 .col.span6 { width: 47.91666665%; }
+        .grid2 .col.span7 { width: 56.24999998%; }
+        .grid2 .col.span8 { width: 64.58333331%; }
+        .grid2 .col.span9 { width: 72.91666664%; }
+        .grid2 .col.span10 { width: 81.24999997%; }
+        .grid2 .col.span11 { width: 89.5833333%; }
+        .grid2 .col.span12 { width: 97.91666663%; }
+    </style>
+    <div class="grid2">
+        <h1>2、弹性网格(12列)</h1>
+        <div class="wrapper">
+            <div class="row">
+              <div class="col">1</div>
+              <div class="col">2</div>
+              <div class="col">3</div>
+              <div class="col">4</div>
+              <div class="col">5</div>
+              <div class="col">6</div>
+              <div class="col">7</div>
+              <div class="col">8</div>
+              <div class="col">9</div>
+              <div class="col">10</div>
+              <div class="col">11</div>
+              <div class="col">12</div>
+            </div>
+            <div class="row">
+              <div class="col span1">13</div>
+              <div class="col span6">14</div>
+              <div class="col span3">15</div>
+              <div class="col span2">16</div>
+            </div>
+          </div>
+    </div>
+
+    <!-- 3、弹性盒子网格 -->
+    <style>
+        .grid3 {
+            width: 90%;
+            /* 960 / 12 = 80 */
+            max-width: 980px;
+            padding: 0 10rpx;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .grid3 .row {
+            display: flex;
+        }
+
+        .grid3 .col {
+            flex: 1 1 auto;
+            /* 60 / 960 = 6.25% */
+            width: 6.25%;
+            /* 20 / 960 = 2.08333333% */
+            margin-left: 2.08333333%;
+            margin-bottom: 1em;
+            background: rgb(255, 150, 150);
+        }
+
+        .grid3 .col.span2 { width: 14.58333333%; }
+        .grid3 .col.span3 { width: 22.91666666%; }
+        .grid3 .col.span4 { width: 31.24999999%; }
+        .grid3 .col.span5 { width: 39.58333332%; }
+        .grid3 .col.span6 { width: 47.91666665%; }
+        .grid3 .col.span7 { width: 56.24999998%; }
+        .grid3 .col.span8 { width: 64.58333331%; }
+        .grid3 .col.span9 { width: 72.91666664%; }
+        .grid3 .col.span10 { width: 81.24999997%; }
+        .grid3 .col.span11 { width: 89.5833333%; }
+        .grid3 .col.span12 { width: 97.91666663%; }
+    </style>
+    <div class="grid3">
+        <h1>3、弹性盒子网格(12列)</h1>
+        <div class="wrapper">
+            <div class="row">
+              <div class="col">1</div>
+              <div class="col">2</div>
+              <div class="col">3</div>
+              <div class="col">4</div>
+              <div class="col">5</div>
+              <div class="col">6</div>
+              <div class="col">7</div>
+              <div class="col">8</div>
+              <div class="col">9</div>
+              <div class="col">10</div>
+              <div class="col">11</div>
+              <div class="col">12</div>
+            </div>
+            <div class="row">
+              <div class="col span1">13</div>
+              <div class="col span6">14</div>
+              <div class="col span3">15</div>
+              <div class="col span2">16</div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>

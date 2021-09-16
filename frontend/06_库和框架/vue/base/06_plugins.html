@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06_plugins</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-jay-directive></div>
+    </div>
+
+    <script>
+        let JayPlugin = {
+            install: function (Vue, options) {
+                // 1、添加全局方法或 property
+                Vue.jayGlobalMethod1 = function () {
+                    console.log(`Globale Methon, ${Vue.jayProp1Name}!`, arguments);
+                };
+                Vue.jayProp1Name = 'Jay';
+
+                // 2、添加全局资源
+                Vue.directive('jay-directive', {
+                    bind() {
+                        console.log('jay-directive is here!', arguments);
+                    }
+                });
+
+                // 3、全局 mixin
+                Vue.mixin({
+                    created() {
+                        console.log('Global Mixin is Creatd!', arguments);
+                        Vue.jayGlobalMethod1();
+                        this.$jayMethod1();
+                    }
+                });
+
+                // 4、添加实例方法
+                Vue.prototype.$jayMethod1 = function () {
+                    console.log('Instance method jayMethod1!', arguments);
+                };
+            }
+        }
+
+        if (Vue) {
+            Vue.use(JayPlugin);
+        }
+    </script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {}
+        });
+    </script>
+</body>
+</html>

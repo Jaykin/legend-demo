@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_vuex</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
+</head>
+<body>
+    <div id="app">
+        <comp-a></comp-a>
+        <comp-b></comp-b>
+        <comp-c></comp-c>
+        <comp-d></comp-d>
+        <comp-e></comp-e>
+    </div>
+
+    <script>
+        const CompA = {
+            template: `<button @click="click">{{ count }}</button>`,
+            computed: {
+                count() {
+                    return this.$store.state.count
+                }
+            },
+            methods: {
+                click() {
+                    this.$store.commit('increment', 1);
+                }
+            }
+        };
+        const CompB = {
+            template: `<button @click="click">{{ count }} | {{ negCount }}</button>`,
+            computed: {
+                count() {
+                    return this.$store.state.count
+                },
+                negCount() {
+                    return this.$store.getters.negCount
+                }
+            },
+            methods: {
+                click() {
+                    this.$store.commit('increment', 2);
+                }
+            }
+        };
+        const CompC = {
+            template: `<button @click="click">{{ count }}</button>`,
+            computed: {
+                count() {
+                    return this.$store.state.count
+                }
+            },
+            methods: {
+                click() {
+                    this.$store.dispatch('subtractAsync', 1);
+                }
+            }
+        };
+        const CompD = {
+            template: `<button @click="click">{{ count }}</button>`,
+            computed: {
+                count() {
+                    return this.$store.state.count
+                }
+            },
+            methods: {
+                click() {
+                    this.$store.commit('increment', 4);
+                }
+            }
+        };
+        const CompE = {
+            template: `<button @click="click">{{ count }}</button>`,
+            computed: {
+                count() {
+                    return this.$store.state.count
+                }
+            },
+            methods: {
+                click() {
+                    this.$store.commit('increment', 5);
+                }
+            }
+        };
+    </script>
+
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                count: 0
+            },
+            getters: {
+                negCount(state, getters) {
+                    return -state.count;
+                }
+            },
+            mutations: {
+                // 同步 increment
+                increment(state, n) {
+                    state.count += n;
+                    console.log('state.count increment to: ', state.count);
+                }
+            },
+            actions: {
+                // 异步 action
+                subtractAsync(context, n) {
+                    setTimeout(function () {
+                        context.commit('increment', -n);
+                    }, 500);
+                }
+            }
+        });
+
+        const app = new Vue({
+            el: '#app',
+            components: {
+                CompA,
+                CompB,
+                CompC,
+                CompD,
+                CompE
+            },
+            store: store
+        });
+    </script>
+</body>
+</html>

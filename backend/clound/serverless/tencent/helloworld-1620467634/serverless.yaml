@@ -1,0 +1,38 @@
+app: helloworld-1620467634
+component: scf
+inputs:
+  cls:
+    logsetId: 5f53a39c-d991-4ca9-8434-6269db69725a
+    topicId: cae662fb-c725-495a-9dc0-6d14472e3062
+  description: helloworld 空白模板函数
+  eip: false
+  enableRoleAuth: true
+  events:
+    - apigw:
+        name: SCF_API_SERVICE
+        parameters:
+          endpoints:
+            - function:
+                functionQualifier: $DEFAULT
+                isIntegratedResponse: true
+              method: GET
+              path: /helloworld-1620467634
+          environment: test
+          protocols:
+            - http
+            - https
+          serviceId: service-84nju7bg
+  handler: index.main_handler
+  memorySize: 128
+  name: helloworld-1620467634
+  namespace: default
+  publicAccess: true
+  region: ap-guangzhou
+  runtime: Nodejs10.15
+  src: ./src
+  timeout: 3
+name: ap-guangzhou_default_helloworld-1620467634
+org: '1300968839'
+stage: dev
+# When using this configuration file for deployment, make sure the file name is "serverless.yml".
+# For more information: https://github.com/serverless-components/tencent-scf/blob/master/docs/configure.md

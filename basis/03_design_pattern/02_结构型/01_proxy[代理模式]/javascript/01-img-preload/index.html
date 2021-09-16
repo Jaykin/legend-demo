@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container {
+            width: 900px;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+
+        .wrap {
+            float: left;
+            padding: 5px;
+        }
+
+        .wrap div {
+            width: 200px;
+            height: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px #ccc;
+        }
+
+        .wrap img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            width: 205px;
+            height: 205px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="wrap">
+            <div><img src="./images/default.png" alt=""/></div>
+        </div>
+        <div class="wrap">
+            <div><img src="./images/default.png" alt=""/></div>
+        </div>
+        <div class="wrap">
+            <div><img src="./images/default.png" alt=""/></div>
+        </div>
+        <div class="wrap">
+            <div><img src="./images/default.png" alt=""/></div>
+        </div>
+    </div>
+
+<script>
+    // 虚拟代理实现图片预加载
+
+        // 本体对象：负责往页面中创建img标签
+    var imgWrap = (function () {
+        var imgDom = document.createElement('img');
+        var divDom = document.createElement('div');
+            divDom.appendChild(imgDom);
+        var imgWrap = document.createElement('div');
+            imgWrap.setAttribute('class', 'wrap');
+            imgWrap.appendChild(divDom);
+        var container = document.querySelector('.container');
+            container.appendChild(imgWrap);
+
+        return {
+            setSrc: function (src) {
+                imgDom.src = src;
+            }
+        }
+    })();
+
+    // setTimeout(function () {
+    //     imgWrap.setSrc('./images/kobe01.jpg');
+    // }, 2000);
+
+
+        // 代理对象：负责当图片加载完后再填充进DOM
+    var proxyImg = (function () {
+        var img = new Image();
+        var holder = './images/default.png';
+
+        img.onload = function () {
+            imgWrap.setSrc(this.src);
+        }
+
+        return {
+            setSrc: function (src) {
+                imgWrap.setSrc(holder);
+                setTimeout(function () {
+                    img.src = src;
+                }, 2000);
+            }
+        }
+    })();
+
+    proxyImg.setSrc('./images/kobe01.jpg');
+
+</script>
+</body>
+</html>

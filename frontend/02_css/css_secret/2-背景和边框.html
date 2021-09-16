@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            background-color: grey;
+        }
+        div {
+            display: inline-block;
+            margin: 50px;
+        }
+        .rgba {
+            width: 200px;
+            background-color: #fff;
+            border: 10px solid hsla(0, 0%, 100%, .5);
+            background-clip: padding-box;           /*默认是border-box*/
+        }
+
+        .many-box-shadow {
+            width: 200px;
+            padding: 30px;
+            background: yellowgreen;
+            box-shadow: 0px 0px 0px 10px #665 inset,
+                        0 0 0 15px deeppink inset,
+                        0 0 0 20px yellowgreen inset,
+                        5px 5px 10px 20px #000 inset;
+        }
+
+        .many-outline {
+            width: 200px;
+            line-height: 2.5;
+            padding-left: 5px;
+            background: #000;
+            color: #fff;
+            outline: 1px dashed #fff;
+            outline-offset: -5px;
+            border-radius: 5px;
+        }
+
+        .back-position {
+            width: 200px;
+            height: 150px;
+            color: #fff;
+            background: url(./image/background-position.png) no-repeat bottom right #58a;
+            /*不支持background-position时写入简写来实现回退*/
+            background-position: bottom 10px right 10px;
+        }
+
+        .back-origin {
+            width: 200px;
+            height: 150px;
+            padding: 10px;
+            color: #fff;
+            background: url(./image/background-position.png) no-repeat bottom right #58a;
+            background-origin: content-box;     /*默认为padding-box*/
+        }
+        .back-calc {
+            width: 200px;
+            height: 150px;
+            color: #fff;
+            background: url(./image/background-position.png) no-repeat bottom right #58a;
+            background-position: calc(100% - 20px) calc(100% - 10px);
+        }
+
+        .border-radius {
+            width: 100px;
+            height: 80px;
+            color: #fff;
+            background-color: #000;
+            border-radius: 10px;
+            /*border: 10px solid #58a;*/
+            box-shadow: 0 0 0 5px #58a;
+            outline: 10px solid #58a;
+        }
+
+        .horiz-stripe {
+            /*水平条纹*/
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(#fb3 33%, #58a 0, #58a 66%, yellowgreen 0);
+                /*当某个色标的位置值比前面的都要小，则会取前面的最大值作为色标*/
+            background-size: 100% 38px;
+        }
+        .vertical-stripe {
+            /*垂直条纹*/
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(-90deg , #fb3 33%, #58a 0, #58a 66%, yellowgreen 0);
+            background-size: 38px 100%;
+        }
+        .gradient-stripe {
+            /*45deg倾斜条纹*/
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+            background-size: 30px 30px;
+        }
+        .gradient-stripe-anydeg {
+            /*任意角度倾斜条纹*/
+            width: 100px;
+            height: 100px;
+            background: repeating-linear-gradient(45deg, #fb3, #fb3 15px, #58a 0, #58a 30px);
+        }
+        .gradient-stripe-main {
+            /*同色系条纹*/
+            width: 100px;
+            height: 100px;
+            background: #58a;
+            background-image: repeating-linear-gradient(60deg,
+                                hsla(0, 0%, 100%, .1),
+                                hsla(0, 0%, 100%, .1) 15px,
+                                transparent 0,
+                                transparent 30px);
+        }
+
+        .back-image-grid01 {
+            width: 120px;
+            height: 120px;
+            background: white;
+            background-image: linear-gradient(90deg, rgba(200, 0, 0, .5) 50%, transparent 0),
+                              linear-gradient(rgba(200, 0, 0, .5) 50%, transparent 0);
+            background-size: 30px 30px;
+        }
+        .back-image-grid02 {
+            width: 120px;
+            height: 120px;
+            background: #58a;
+            background-image: linear-gradient(white 1px, transparent 0),
+                              linear-gradient(90deg, white 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+        .back-image-grid03 {
+            width: 170px;
+            height: 170px;
+            background: #58a;
+            background-image: linear-gradient(white 2px, transparent 0),
+                              linear-gradient(90deg, white 2px, transparent 0),
+                              linear-gradient(hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                              linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0);
+            background-size: 75px 75px, 75px 75px,
+                             15px 15px, 15px 15px;
+        }
+        .back-image-polka {
+            width: 170px;
+            height: 170px;
+            background: #655;
+            background-image: radial-gradient(tan 30%, transparent 0),
+                              radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        .back-image-checkerboard {
+            width: 200px;
+            height: 200px;
+            background: #eee;
+            background-image: linear-gradient(45deg, rgba(0, 0, 0, .25) 25%, transparent 0,
+                                                transparent 75%, rgba(0, 0, 0, .25) 0),
+                              linear-gradient(45deg, rgba(0, 0, 0, .25) 25%, transparent 0,
+                                                transparent 75%, rgba(0, 0, 0, .25) 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="rgba">1.0 半透明边框</div>
+
+    <div class="many-box-shadow">2.0 多重边框:box-shadow</div>
+    <div class="many-outline">2.0 多重边框:outline</div>
+
+    <div class="back-position">3.0 背景定位:background-position</div>
+    <div class="back-origin">3.0 背景定位:background-origin</div>
+    <div class="back-calc">3.0 背景定位:calc()</div>
+
+    <div class="border-radius">4.0 边框内圆角</div>
+
+    <div class="horiz-stripe">5.0 条纹背景:水平条纹</div>
+    <div class="vertical-stripe">5.0 条纹背景:垂直条纹</div>
+    <div class="gradient-stripe">5.0 条纹背景:45deg倾斜条纹</div>
+    <div class="gradient-stripe-anydeg">5.0 条纹背景:任意角度倾斜条纹</div>
+    <div class="gradient-stripe-main">5.0 条纹背景:同色系条纹</div>
+
+    <div class="back-image-grid01">6.0 复杂的背景图案:网格01</div>
+    <div class="back-image-grid02">6.0 复杂的背景图案:网格01</div>
+    <div class="back-image-grid03">6.0 复杂的背景图案:网格03</div>
+    <div class="back-image-polka">6.0 复杂的背景图案:波点</div>
+    <div class="back-image-checkerboard">6.0 复杂的背景图案:西洋棋盘</div>
+</body>
+</html>

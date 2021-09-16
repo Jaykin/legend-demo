@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_render</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <comp-a :level="level">
+            <template v-slot:default>H{{level}}</template>
+            <template v-slot:header="slotProps">{{slotProps.desc}}</template>
+        </comp-a>
+        <!-- 函数式组件 -->
+        <comp-b>COMP_B</comp-b>
+    </div>
+
+    <script>
+        const CompA = {
+            props: {
+                // 子组件会响应父组件的 prop 来重新渲染
+                level: {
+                    type: Number,
+                    required: true
+                }
+            },
+            render: function (createElement) {
+                console.log(this.$slots); // 静态插槽
+                console.log(this.$scopedSlots); // 作用域插槽
+                return createElement(
+                    'h' + this.level,   // DOM 标签名称
+                    {
+                        // HTML attribute
+                        attrs: {
+                            id: 'myBox'
+                        },
+                        // DOM property
+                        domProps: {
+                            // innerHTML: 'innerHTML'
+                        },
+                        // ......
+                    },
+                    [
+                        this.$scopedSlots.default({
+                            desc: '，default slot!'
+                        }),
+                        this.$scopedSlots.header({
+                            desc: '，header slot!'
+                        })
+                    ] // 子节点 VNode 数组
+                );
+            }
+        };
+
+        // 函数式组件
+        const CompB = {
+            functional: true,
+            render: function (createElement, context) {
+                console.log(context); // context 代替 this
+                return createElement(
+                    'div',
+                    context.slots().default
+                );
+            }
+        }
+    </script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                level: 1
+            },
+            components: {
+                CompA,
+                CompB
+            },
+            mounted: function () {
+                const vm = this;
+                // setInterval(function () {
+                //     vm.level++;
+                // }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

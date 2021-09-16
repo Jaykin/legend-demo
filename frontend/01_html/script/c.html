@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Rosetta C Example</title>
+        <!-- 仅是提供一种方式来将 ECMAScript 与 C 联系起来，C 编译器需要另外添加 -->
+        <script type="text/javascript" src="rosetta.js"></script>
+        <script type="text/javascript" src="rosetta_c.js"></script>
+        <script type="text/x-c">
+        #include <stdio.h>
+
+        int main () {
+            printf("Hello world number 1!\n");
+            return 0;
+        }
+        </script>
+    </head>
+
+    <body>
+        <p>Lorem ipsum</p>
+
+        <script type="text/javascript">
+        rosetta.translateAll();
+        </script>
+    </body>
+</html>
