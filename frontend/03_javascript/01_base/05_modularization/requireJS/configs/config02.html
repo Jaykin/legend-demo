@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--配置项脚本在require.js之后-->
+
+<script src="../libs/require.js"></script>
+
+<script>
+    // 设置配置项
+    require.config({
+        baseUrl: "/workspace/git/modularization-demo-/requireJS",
+        paths: {
+            "moduleA": "modules/moduleA"
+        }
+    });
+
+    // 设置依赖项
+    require(['moduleA'], function (moduleA) {
+        console.dir(moduleA);
+    })
+
+</script>
+</body>
+</html>

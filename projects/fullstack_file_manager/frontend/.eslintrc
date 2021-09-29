@@ -1,0 +1,76 @@
+{
+    // 扩展
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+
+    // 解析器
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true,
+            "arrowFunctions": true,
+            "classes": true,
+            "modules": true,
+            "defaultParams": true
+        }
+    },
+
+    // 解析器
+    "parser": "babel-eslint",
+
+    // 环境
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jest": true,
+        "jquery": true
+    },
+
+    // 插件
+    "plugins": ["react"],
+
+    // 规则
+    "rules": {
+        // 设定缩进为4个空格
+        "indent" : [2, 4, {"SwitchCase": 1}],
+        // 允许object键值后有空格，否则对齐等号会报错
+        "key-spacing" : 0,
+        // function 可以不需要名称，例如，接受Foo.prototype.bar = function () {};
+        "func-names": [2, "never"],
+        "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
+        // 代码注释exeptions
+        "spaced-comment":["error", "always", {
+            "line": {
+                "markers": ["/"],
+                "exceptions": ["-", "+"]
+            },
+            "block": {
+                "markers": ["!"],
+                "exceptions": ["*", "-", "=", "+"],
+                "balanced": true
+            }
+        }],
+        // 允许代码中有console.log
+        "no-console" : 0,
+        // 允许代码中有alert
+        "no-alert" : 0,
+        // 当且仅当function有return时，才强制js doc里面有return type
+        "valid-jsdoc": [2, {"requireReturn": false}],
+        // 允许在作用域内重复使用'err'
+        "no-shadow": [2, { "allow": ["err"] }],
+        // 允许function的参数定义后不使用
+        "no-unused-vars": [2, { "args": "none" }],
+        "new-cap": [2, {
+            "capIsNewExceptions": ["Deferred"],
+            "newIsCapExceptions": ["sS"]
+        }],
+        // 允许不验证propTypes
+        "react/prop-types": 0,
+        // 允许字符串refs属性
+        "react/no-string-refs": 0,
+        // 允许无displayname的组件
+        "react/display-name": 0
+    }
+}

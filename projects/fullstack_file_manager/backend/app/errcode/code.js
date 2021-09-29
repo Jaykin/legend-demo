@@ -1,0 +1,34 @@
+
+// 1~990 通用错误
+// 1000~1990 类型模块错误码
+// 2000~2999 板块模块错误码
+// 3000~3999 文件模块错误码
+// 4000~4999 chunk 模块错误码
+
+exports.UNDEFINED_ERROR = 99;
+exports.AUTH_UNVALID = 106;
+exports.AUTH_USER_NOT_FOUND = 107;
+
+exports.FILE_SAME_NAME = 3000;
+exports.FILE_ALL_SAME = 3001;
+exports.FILE_NOT_EXIST = 3002;
+exports.FILE_EXIST = 3003;
+exports.FILE_DELETED = 3004;
+exports.FILE_IN_PROGRESS = 3005;
+exports.FILE_NEW_RECORD = 3006;
+// 同 md5 的文件，正在上传中。两边不能同时上传。
+exports.FILE_SAME_FILE_IN_PROGRESS = 3007;
+
+exports.SECTION_NAME_EXIST = 2000;
+exports.SECTION_TARGET_NOT_EXIST = 2001;
+
+
+exports.CATEGORY_NOT_FOUND = 1000;
+exports.CATEGORY_EXIST = 1001;
+exports.CATEGORY_UPDATE_NAME_DUPLICATE = 1002;
+exports.CATEGORY_CREATE_NAME_DUPLICATE = 1003;
+
+exports.CHUNK_EXIST = 4000;
+exports.CHUNK_UNMATCH = 4001;
+exports.CHUNK_MD5_INVALID = 4002;
+

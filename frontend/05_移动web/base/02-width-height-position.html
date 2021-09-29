@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>JS宽高位置总结</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 120px;
+            font-size: 12px;
+        }
+
+        .client {
+            /*padding: 10px;*/
+        }
+
+        .client > .box {
+            /*padding: 10px;*/
+            border-top: 5px solid #ccc;
+            border-left: 3px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 8px solid #ccc;
+            margin: 5px;
+            background-color: #000;
+            color: #fff;
+            height: 70px;
+            overflow: auto;
+        }
+
+        .offset {
+            position: relative;
+        }
+
+        .offset > .box {
+            /*padding: 10px;*/
+            /*border: 5px solid #ccc;*/
+            margin: 5px;
+            background-color: yellowgreen;
+            color: #fff;
+            height: 70px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="client">
+        <hr />
+        <h3>clientWidth/clientHeight：</h3>
+        <div class="box">
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+        </div>
+    </div>
+
+    <div class="offset">
+        <hr />
+        <h3>offsetWidth/offsetHeight：</h3>
+        <div class="box">
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+            <p>1</p>
+        </div>
+    </div>
+
+
+
+    <script>
+        // clientWidth/clientHeight/clientTop/clientLeft
+        var clientDom = document.querySelector('.client > .box');
+        var cw = clientDom.clientWidth + 'px';
+        var ch = clientDom.clientHeight + 'px';
+        var ct = clientDom.clientTop + 'px';
+        var cl = clientDom.clientLeft + 'px';
+        console.log('clientWidth: ' + cw + '\nclientHeight: ' + ch);
+        console.log('clientTop: ' + ct + '\nclientLeft: ' + cl);
+
+
+        // offsetWidth/offsetHeight/offsetTop/offsetLeft
+        var offsetDom = document.querySelector('.offset > .box');
+        var ow = offsetDom.offsetWidth + 'px';
+        var oh = offsetDom.offsetHeight + 'px';
+        var ol = offsetDom.offsetLeft + 'px';
+        var ot = offsetDom.offsetTop + 'px';
+        console.log('offsetWidth: ' + ow + '\noffsetHeight: ' + oh);
+        console.log('offsetLeft: ' + ol + '\noffsetTop: ' + ot);
+        console.log('offsetParent: ', offsetDom.offsetParent);
+
+
+        // scrollWidth/scrollHeight/scrollTop/scrollLeft
+        var scrollDom = document.querySelector('.offset > .box');
+        var sw = scrollDom.scrollWidth + 'px';
+        var sh = scrollDom.scrollHeight + 'px';
+        console.log('scrollWidth: ' + sw + '\nscrollHeight: ' + sh);
+
+        scrollDom.onscroll = function () {
+            console.log('scrollTop: ' + this.scrollTop + 'px' + '\nscrollLeft: ' + this.scrollLeft + 'px');
+        }
+
+
+        // clientX/clientY
+        var clientxyDom = document.querySelector('.client > .box');
+        clientxyDom.onclick = function (e) {
+            e = e || window.event;
+
+            console.log('clientX: ' + e.clientX + '\nclientY: ' + e.clientY);
+        }
+
+    </script>
+</body>
+</html>

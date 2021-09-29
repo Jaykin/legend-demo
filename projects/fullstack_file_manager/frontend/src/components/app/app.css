@@ -1,0 +1,8 @@
+
+.ids-app-wrap {
+    position: relative;
+}
+
+.ids-app-nav, .ids-app-main {
+    padding: 0 20px 0 220px;
+}

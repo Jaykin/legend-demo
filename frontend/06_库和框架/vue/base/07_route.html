@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_route</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const VLink = {
+            template: `
+                <a
+                    :href="href"
+                    @click="go"
+                >
+                    <slot></slot>
+                </a>
+            `,
+            props: ['href'],
+            methods: {
+                go(e) {
+                    e.preventDefault();
+                    this.$root.currentRoute = this.href;
+
+                    window.history.pushState(
+                        null,
+                        'Page Title!',
+                        this.href
+                    );
+                }
+            }
+        };
+        const VNav = {
+            template: `
+                <div>
+                    <v-link href="/">Home</v-link>
+                    <v-link href="/about">About</v-link>
+                </div>
+            `,
+            components: {
+                'VLink': VLink
+            }
+        };
+
+        const NotFound = { template: '<div><v-nav></v-nav><p>Page Not Found！</p></div>', components: {'VNav': VNav} };
+        const Home = { template: '<div><v-nav></v-nav><p>home page！</p></div>', components: {'VNav': VNav} };
+        const About = { template: '<div><v-nav></v-nav><p>about page！</p></div>', components: {'VNav': VNav} };
+        const routes = {
+            '/': Home,
+            '/about': About
+        }
+
+    </script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                currentRoute: window.location.pathname
+            },
+            computed: {
+                viewComponent() {
+                    console.log('this.currentRoute changed: ', this.currentRoute);
+                    return routes[this.currentRoute] || NotFound
+                }
+            },
+            render(c) {
+                return c(this.viewComponent);
+            }
+        });
+
+        window.addEventListener('popstate', function () {
+            console.log('popstate: ', window.location.pathname);
+            app.currentRoute = window.location.pathname;
+        });
+    </script>
+</body>
+</html>

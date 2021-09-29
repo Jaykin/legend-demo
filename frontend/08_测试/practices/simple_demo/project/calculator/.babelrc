@@ -1,0 +1,28 @@
+{
+    "presets": ["es2015", "react"],
+    "plugins": [
+        "transform-object-rest-spread"
+    ],
+    "env": {
+        "development": {
+            "plugins": [
+                "transform-remove-strict-mode",
+                [
+                    "react-transform",
+                    {
+                        "transforms": [
+                            {
+                                "transform": "react-transform-hmr",
+                                "imports": ["react"],
+                                "locals": ["module"]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        },
+        "test": {
+            "plugins": ["transform-es2015-modules-commonjs"]
+        }
+    }
+}

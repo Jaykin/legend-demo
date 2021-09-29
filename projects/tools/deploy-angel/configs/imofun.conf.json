@@ -1,0 +1,12 @@
+{
+    "dist": "/Users/levblanc/fengche/gitlab/imofun/dist",
+    "svn": {
+        "alpha": "/Users/levblanc/fengche/walle/imofun/test",
+        "beta": "/Users/levblanc/fengche/walle/imofun/test",
+        "release": "/Users/levblanc/fengche/walle/imofun/release"
+    },
+    "walle": {
+        "alpha": "70",
+        "beta": "71"
+    }
+}

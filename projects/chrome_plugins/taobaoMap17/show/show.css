@@ -1,0 +1,20 @@
+body {
+    padding: 20px;
+}
+
+.ui.header.show-header {
+    margin-top: 10px;
+}
+
+.goods-image {
+    width: 100px;
+}
+
+.ui.table thead,
+.ui.table tbody {
+    text-align: center;
+}
+
+.taobao-goods td {
+    color: #D67C1C;
+}

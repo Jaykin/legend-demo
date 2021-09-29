@@ -1,0 +1,21 @@
+{
+  "name": "mvc_todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --progress --colors"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "eventemitter2": "^5.0.0",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.2.1"
+  }
+}

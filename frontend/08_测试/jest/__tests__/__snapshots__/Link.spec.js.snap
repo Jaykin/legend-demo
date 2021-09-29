@@ -1,0 +1,59 @@
+exports[`test Link changes the class when hovered 1`] = `
+<a
+  className="normal"
+  href="http://www.facebook.com"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;
+
+exports[`test Link changes the class when hovered 2`] = `
+<a
+  className="hovered"
+  href="http://www.facebook.com"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;
+
+exports[`test Link changes the class when hovered 3`] = `
+<a
+  className="normal"
+  href="http://www.facebook.com"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;
+
+exports[`test properly escapes quotes 1`] = `
+<a
+  className="normal"
+  href="#"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;
+
+exports[`test 正确渲染 1`] = `
+<a
+  className="normal"
+  href="https://www.baidu.com"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;
+
+exports[`test 链接不设置地址 1`] = `
+<a
+  className="normal"
+  href="#"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}>
+  百度一下会死啊！
+</a>
+`;

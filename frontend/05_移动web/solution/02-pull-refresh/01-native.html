@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>pull refresh</title>
+    <!--<script type="application/javascript" src="mui/src/js/mui.js"></script>-->
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            background-color: #ccc;
+            color: green;
+        }
+
+        .wrapper {
+            position: relative;
+            /*padding-top: 50px;*/
+            margin: 4px;
+            /*width: 100%;*/
+            height: 100%;
+            border: 2px solid red;
+        }
+
+        .wrapper-head {
+            position: absolute;
+            top: 0;
+            height: 50px;
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .wrapper-main {
+            height: 100%;
+            padding-top: 50px;
+            border: 2px solid #000;
+            box-sizing: border-box;
+            overflow-y: auto;           /*固定滚动范围*/
+        }
+
+        .wrapper-main_content {
+            height: 100%;
+        }
+
+        .wrapper-pull_up, .wrapper-pull_down {
+            height: 50px;
+            border: 2px solid yellow;
+            margin: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="wrapper-head">我是头部</div>
+        <div class="wrapper-main">
+            <div class="wrapper-pull_down">下拉刷新</div>
+            <div class="wrapper-main_content">
+                <span id="scrollData">滚动高度：</span>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </div>
+            <div class="wrapper-pull_up">上拉加载</div>
+        </div>
+    </div>
+
+<script>
+    var scroller = document.querySelector('.wrapper-main');
+    var dataShowDom = document.getElementById('scrollData');
+
+    scroller.scrollTop = 60;
+
+    scroller.onscroll = function () {
+        console.log(this.scrollTop);
+        dataShowDom.innerHTML = '滚动高度：' + this.scrollTop + 'px';
+    };
+
+    scroller.addEventListener('touchstart', function () {
+
+    });
+
+</script>
+</body>
+</html>

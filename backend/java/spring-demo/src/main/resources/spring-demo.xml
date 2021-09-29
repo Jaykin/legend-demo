@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.springdemo.jay.DAO" />
+
+    <bean id="helloWorld" class="com.springdemo.jay.HelloWorld">
+    </bean>
+
+    <bean id="spellChecker" class="com.springdemo.jay.SpellChecker">
+    </bean>
+
+    <!--  AOP  -->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash; 声明切面 &ndash;&gt;-->
+<!--        <aop:aspect id="myAspect" ref="myAop">-->
+<!--            &lt;!&ndash; 声明切入点，execution - 匹配方法执行的连接点 &ndash;&gt;-->
+<!--            <aop:pointcut id="myPointcut" expression="execution (* com.springdemo.jay.SpellChecker.checkSpelling(..) )"/>-->
+<!--            &lt;!&ndash; 声明通知 &ndash;&gt;-->
+<!--            <aop:before method="beforeAdvice" pointcut-ref="myPointcut"/>-->
+<!--            <aop:after-returning method="afterReturningAdvice" pointcut-ref="myPointcut" returning="result" />-->
+<!--            <aop:after-throwing method="afterThrowingAdvice" throwing="throwable" pointcut-ref="myPointcut" />-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+    <!-- 切面实现类 -->
+<!--    <bean id="myAop" class="com.springdemo.jay.Aop"></bean>-->
+
+    <!--  MyBatis - 数据源配置  -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/sql_demo?useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    <!--  MyBatis - 会话管理  -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--        <property name="configLocation" value="classpath:mybatis-config.xml" />-->
+        <property name="mapperLocations" value="classpath*:mappers/*Mapper.xml" />
+    </bean>
+    <!--  MyBatis - Mapper扫描  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.springdemo.jay.DAO" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+    </bean>
+    <!-- 定义事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 使用注解 @Transactional 定义事务 -->
+    <tx:annotation-driven />
+</beans>

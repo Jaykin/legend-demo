@@ -1,0 +1,5 @@
+<view bindtap="handleTapPageA">
+    PageA
+    <cmp-d prop="{{ {d: 4} }}">
+    </cmp-d>
+</view>

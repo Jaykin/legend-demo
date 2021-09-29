@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "cmp-d": "/components/cmpLifecycle/cmpD/cmpD"
+
+    }
+}

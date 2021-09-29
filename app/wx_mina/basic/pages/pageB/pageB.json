@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "cmp-b": "/components/cmpLifecycle/cmpB/cmpB",
+        "cmp-a": "/components/cmpLifecycle/cmpA/cmpA",
+        "cmp-c": "/components/cmpLifecycle/cmpC/cmpC"
+    }
+}

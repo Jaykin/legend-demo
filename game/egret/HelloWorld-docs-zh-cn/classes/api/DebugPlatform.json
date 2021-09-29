@@ -1,0 +1,33 @@
+{
+	"member": [],
+	"function": [
+		{
+			"kind": "function",
+			"name": "getUserInfo",
+			"memberof": "DebugPlatform",
+			"scope": "instance",
+			"pType": "public"
+		},
+		{
+			"kind": "function",
+			"name": "login",
+			"memberof": "DebugPlatform",
+			"scope": "instance",
+			"pType": "public"
+		}
+	],
+	"globalMember": [],
+	"globalFunction": [],
+	"class": {
+		"kind": "class",
+		"name": "DebugPlatform",
+		"memberof": "",
+		"filename": "Platform.ts",
+		"implements": [
+			{
+				"name": "Platform"
+			}
+		]
+	},
+	"pType": "public"
+}

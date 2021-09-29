@@ -1,0 +1,13 @@
+{
+    "appName":"idcs",
+    "port":3333,
+    "upload_path":"./upload/",
+    "db":{
+        "host": "localhost",
+        "user": "root",
+        "password": "xxx",
+        "database": "resourcemanage",
+        "multipleStatements":true,
+        "logging":false
+    }
+}

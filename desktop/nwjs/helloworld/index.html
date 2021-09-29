@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+    <meta charset="utf8" />
+</head>
+<body>
+    <h1>Hello World jj!</h1>
+    <script>
+        // 自动打开调试面板
+        const win = nw.Window.get();
+        win.showDevTools();
+        // reload
+        const fs = require('fs');
+        fs.watchFile('index.html', () => {
+            win.reload();
+        });
+
+        // 1、使用 nw.js 的 API
+        const menu = new nw.Menu();
+        menu.append(new nw.MenuItem({
+            label: 'reload',
+            click: function(){
+                win.reload();
+            }
+        }));
+        document.body.addEventListener('click', function(ev) {
+            ev.preventDefault();
+            menu.popup(ev.x, ev.y);
+            return false;
+        }, false);
+
+        // 2、使用 node.js 的 API
+        const os = require('os');
+        console.log(os.platform());
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<view class="wrapper">
+    <view class="img-wrapper">
+        <button size="mini" plain type="primary" bindtap="handleChooseImg">选择图片</button>
+        <image class="img-source" src="{{sourceImgUrl}}" style="{{'width:' + imgWidth + 'px;height:' + imgHeight + 'px;'}}"></image>
+        <canvas class="img-target" canvas-id="imger" style="{{'width:' + imgWidth + 'px;height:' + imgHeight + 'px;'}}" binderror="handleCanvasError"></canvas>
+    </view>
+    
+    <view class="actions" bindtap="handleActions">
+        <view wx:for="{{actions}}" wx:key="index" class="action-item" data-type="{{item.type}}">{{item.text}}</view>
+    </view>
+</view>

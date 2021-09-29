@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>安装部系统api</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<p>安装部系统接口对应：</p>
+<h1>登录模块（暂未使用）</h1>
+<h3>登入：</h3>
+<ul>
+<li>type:</li>
+<li>url:/api/auth/login</li>
+<li>
+<p>input</p>
+<pre><code>{
+    &quot;name&quot;:&quot;test&quot;
+    &quot;password&quot;:&quot;test&quot;
+}</code></pre>
+</li>
+<li>
+<p>output:</p>
+<pre><code>{
+    errcode:0,
+    errmsg:'',
+    data:{
+        &quot;name&quot;:&quot;test&quot;
+        &quot;token&quot;:&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;
+    }
+}</code></pre>
+    </li>
+</ul>
+<h3>登出：</h3>
+<ul>
+<li>type:post  (暂定)</li>
+<li>url:/api/auth/login</li>
+<li>
+<p>input</p>
+<pre><code>{
+    &quot;name&quot;:&quot;test&quot;
+    &quot;token&quot;:&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;
+}</code></pre>
+</li>
+<li>
+<p>output:</p>
+<pre><code>{
+    errcode:0,
+    errmsg:'',
+    data:{}
+}</code></pre>
+</li>
+</ul>
+
+
+<h1>文件模块</h1>
+<h3>文件列表：</h3>
+<ul>
+<li>type:get</li>
+<li>url:/api/file</li>
+<li>
+<p>input</p>
+<pre><code>{
+    'name': 文件名称,
+    'ext': 文件格式,
+    'brand_id': 品牌 id
+    'series_id'： 车系 id
+    'model_id'： 车型 id
+    'type_a_id'： 类型1 id
+    'type_b_id'： 类型 2 id
+    'type_c_id'： 类型 3 id
+    'section_id'： 板块 id
+    'is_open'： 是否公开
+    'from'： 从第几个开发
+    'page_size' ： 每页大小
+}
+</code></pre>
+
+</li>
+<li>
+<p>output:</p>
+<pre><code>{
+    errcode:0,
+    errmsg:'',
+    data:{
+        files:[{
+            &quot;file_id&quot;: 2,
+            &quot;file_name&quot;: &quot;IDS接口需求.html&quot;,
+            &quot;file_brand_id&quot;: 155,
+            &quot;file_brand_name&quot;: &quot;斯达泰克&quot;,
+            &quot;file_type_a_id&quot;: 1,
+            &quot;file_type_b_id&quot;: 3,
+            &quot;file_type_c_id&quot;: null,
+            &quot;file_type_a_name&quot;: &quot;testupdate&quot;,
+            &quot;file_type_b_name&quot;: &quot;测试分类&quot;,
+            &quot;file_type_c_name&quot;: null,
+            &quot;file_fromat&quot;: &quot;html&quot;,
+            &quot;file_is_open&quot;: 1,
+            &quot;file_brief&quot;: &quot;&quot;,
+            &quot;file_size&quot;: 16672,
+            &quot;file_upload_time&quot;: &quot;1480939901754&quot;,
+            &quot;file_download_url&quot;: &quot;/api/file/download?id=2&quot;
+          }],
+        &quot;file_total&quot;: 1 // 找到的总数
+    }
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>文件下载</h3>
+<ul>
+<li>type: get</li>
+<li>url: /api/file/download</li>
+<li>
+<p>input</p>
+<pre><code>{
+    id:1 // 文件 id
+}
+</code></pre>
+
+</li>
+<li>
+<p>output 略</p>
+</li>
+</ul>
+<h3>文件删除</h3>
+<ul>
+<li>type: post</li>
+<li>url: /api/file/del</li>
+<li>
+input
+	{
+		id:1
+	}
+</li>
+</ul>
+<h3>文件更新</h3>
+<ul>
+<li>type:post,</li>
+<li>url:/api/file/update</li>
+<li>
+<p>input </p>
+<pre><code>{
+    id:1,
+    name:'123', // 不能为空
+    description:'1asdfa', // 可以为空字符串
+    brand_id:1 // 如果没有，为空 0
+    series_id:12, // 如果没有，为空 0
+    model_id:123, // 如果没有，为空 0
+    section_id:1, // 如果没有，为空 0
+    type_a_id:1, // 如果没有，为空 0
+    type_b_id:2, // 如果没有，为空 0
+    type_c_id:3, // 如果没有，为空 0
+    is_open:1 // 1 开放， 0  不开放
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>文件覆盖</h3>
+<ul>
+<li>type:post</li>
+<li>url: /api/file/update</li>
+<li>input 略 ,按照上传文件一样，带上要覆盖的目标文件的 id</li>
+<li>output 略</li>
+</ul>
+<h3>文件查询是否重复</h3>
+<ul>
+<li>type:get</li>
+<li>url:/api/file/is_duplicate</li>
+<li>
+<p>input</p>
+<pre><code>// 会检查 1、同类型，同车型下是否有同名文件   2、是否有同名文件。
+{
+    &quot;brand_id&quot;:155
+    &quot;series_id&quot;:1324&amp;
+    &quot;model_id&quot;:19214&amp;
+    &quot;type_ids&quot;:1,3
+    &quot;section_id&quot;:2
+    &quot;name&quot;:'IDS接口需求'
+    &quot;ext&quot;:'html'
+}
+</code></pre>
+<p>output</p>
+<pre><code>
+{
+    data:{
+        duplicate_id:51,
+        type:3001           '2000': '该板块名称已经存在','2001': '板块 id 不存在','3000': '存在同名文件', // 文件同名是这个  '3001': '该文件已经存在'  // 同类型同 品牌 是这个
+    }
+}
+
+</code></pre>
+
+</li>
+</ul>
+<h3>文件上传</h3>
+<ul>
+<li>type:post</li>
+<li>url:/api/file/upload</li>
+<li>
+<p>input</p>
+<pre><code>{
+    file_name:'123', // 不能为空
+    description:'1asdfa', // 可以为空字符串
+    brand_id:1 // 如果没有，为空 0
+    series_id:12, // 如果没有，为空 0
+    model_id:123, // 如果没有，为空 0
+    section_id:1, // 如果没有，为空 0
+    type_ids:'1,2' // 按照数序，拼接城字符串
+    is_open:1 // 1 开放， 0  不开放
+    file: // 文件
+}
+</code></pre>
+
+</li>
+</ul>
+<hr />
+<h1>板块模块</h1>
+<h3>获取板块列表</h3>
+<ul>
+<li>type:get</li>
+<li>url: /api/section</li>
+<li>input: 无</li>
+<li>
+<p>output</p>
+<pre><code>{
+    &quot;errcode&quot;: 0,
+    &quot;data&quot;: [{
+                &quot;section_id&quot;: 1,
+                &quot;section_name&quot;: &quot;哈哈哈哈sss&quot;,
+                &quot;section_brief&quot;: &quot;测试哈哈&quot;
+            }
+        ]
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>删除板块</h3>
+<ul>
+<li>type:post</li>
+<li>url:/api/section/del</li>
+<li>input </li>
+<li>
+<p>output </p>
+<pre><code>{
+    &quot;errcode&quot;: 0,
+    &quot;data&quot;: {}
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>更新板块</h3>
+<ul>
+<li>type:post</li>
+<li>url: /api/section/update</li>
+<li>
+<p>input:</p>
+<pre><code>{
+    id:1,
+    name:'ssss'
+    description:'111'
+}
+</code></pre>
+
+</li>
+<li>
+<p>output 略</p>
+</li>
+</ul>
+<h3>新增板块</h3>
+<ul>
+<li>type:post</li>
+<li>url:/api/section/new</li>
+<li>
+<p>input</p>
+<pre><code>{
+    name:'ss',
+    description:'ssss'
+}
+</code></pre>
+
+</li>
+<li>
+<p>output:略</p>
+</li>
+</ul>
+<hr />
+<h1>文件分类</h1>
+<h3>获取全部分类</h3>
+<ul>
+<li>type:get</li>
+<li>url:/api/category/all</li>
+<li>input 略</li>
+<li>
+<p>output </p>
+<pre><code>{
+    data:[{
+        id:1,
+        name:'ss',
+        children:[
+            {
+                id:1.
+                name:'ss',
+                children:[]
+            }
+        ]
+    }]
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>分类编辑</h3>
+<ul>
+<li>type:post</li>
+<li>url:/api/category/edit</li>
+<li>
+<p>input</p>
+<pre><code>{
+    new:[{
+        name:'ss',
+        description:'ss',
+        parent_id:1, // 如果没有 parent_id 的话，会默认是第一类
+        children:[{
+            name:'ss',
+            description:'abc', // 这种情况下，默认上一级是自己的 parent_id
+        }]
+    }],
+    del:[1,2,3] // 被删除了的分类,
+    // 更新的分类
+    update:[{
+        id:1,
+        name:'sss',
+        description:'11sss'
+    },{
+        id:1,
+        name:'sss',
+        description:'11sss'
+    }]
+}
+</code></pre>
+
+</li>
+</ul>
+<h3>查询子分类</h3>
+<ul>
+<li>type: get</li>
+<li>url:/api/category</li>
+<li>
+<p>input</p>
+<pre><code>{
+    id:1 // 分类 id ，会查询该分类下的子分类
+}
+</code></pre>
+
+</li>
+<li>
+<p>output </p>
+<pre><code>{
+    &quot;errcode&quot;: 0,
+    &quot;data&quot;: [
+            {
+                &quot;id&quot;: 3,
+                &quot;name&quot;: &quot;测试分类 multi Update22&quot;,
+                &quot;description&quot;: &quot;&quot;,
+                &quot;parent_id&quot;: 1
+            },
+            {
+                &quot;id&quot;: 4,
+                &quot;name&quot;: &quot;测试分类阿斯蒂芬&quot;,
+                &quot;description&quot;: &quot;测试新增描述ss&quot;,
+                &quot;parent_id&quot;: 1
+            }
+        ]
+}
+</code></pre>
+
+</li>
+</ul>
+<hr />
+<h1>车型相关接口</h1>
+<h3>获取车型车系</h3>
+<ul>
+<li>type:get</li>
+<li>url:/api/car_classsification</li>
+<li>
+<p>input:</p>
+<pre><code>{
+    // 什么都不传，获取所有车牌
+    brand_id:1 // 获取车系
+    series_id:2 // 获取车系下的车型
+}
+</code></pre>
+
+</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

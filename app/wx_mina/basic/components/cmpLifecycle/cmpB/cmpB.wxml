@@ -1,0 +1,4 @@
+<view>
+    cmpB
+    <slot></slot>
+</view>   

@@ -1,0 +1,42 @@
+{
+    "manifest_version": 2,
+    "name": "ticketDraber",
+    "description": "12306自动抢票",
+    "version": "0.1",
+    "author": {
+        "name": "Jay Kin"
+    },
+    "icons": {
+        "16": "assets/images/icons.png",
+        "48": "assets/images/icons.png",
+        "128": "assets/images/icons.png"
+    },
+
+    "web_accessible_resources": ["images/*.png"],
+
+    "browser_action": {
+        "default_icon": {
+            "19": "assets/images/icon19.png",
+            "38": "assets/images/icon38.png"
+        },
+        "default_title": "数据同步助手",
+        "default_popup": "popup/popup.html"
+    },
+
+    "background": {
+        "scripts": ["assets/common.js", "background/background.js"]
+    },
+
+    "content_scripts": [{
+        "matches": ["*://gz.17zwd.com/*", "*://item.taobao.com/*"],
+        "js": ["assets/jquery.js", "assets/common.js", "content/getGoodsInfo.js"]
+    }],
+
+    "permissions": [
+        "*://*.taobao.com/*",
+        "management",
+        "contextMenus",
+        "tabs",
+        "notifications"
+    ]
+}

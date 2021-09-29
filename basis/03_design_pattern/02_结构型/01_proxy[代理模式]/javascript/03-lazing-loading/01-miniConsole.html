@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="log">
+        <h3>日志：</h3>
+    </div>
+
+    <script>
+        // miniConsole功能的代理
+        var miniConsole = (function () {
+            var cache = [];
+
+            var handler = function (e) {
+                if (e.keyCode === 113) {
+                    var script = document.createElement('script');
+
+                    script.onload = function () {
+                        // 真实功能脚本加载完后，循环执行
+                        for (var i = 0, fn; fn = cache[i++]; ) {
+                            fn();
+                        }
+                    }
+                    script.src = './miniConsole.js';
+                    document.body.appendChild(script);
+                    document.removeEventListener('keydown', handler);   // 保证只加载一次miniConsole.js
+                }
+            }
+
+            document.addEventListener('keydown', handler, false);
+
+            return {
+                log: function () {
+                    var args = arguments;
+
+                    cache.push(function () {
+                        return miniConsole.log.apply(miniConsole, args);
+                    })
+                }
+            }
+        })();
+
+        miniConsole.log('log001');
+        miniConsole.log('log002');
+        miniConsole.log('log003');
+    </script>
+</body>
+</html>

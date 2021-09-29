@@ -1,0 +1,26 @@
+body {
+    height: 120;
+    width: 120;
+}
+
+.actList-wrap {
+    margin: 10px auto;
+}
+
+.actList-wrap h3 {
+    text-align: center;
+}
+
+.action-list {
+    line-height: 2em;
+}
+
+.action-item {
+    cursor: pointer;
+    text-align: center;
+}
+
+.action-item:hover {
+    color: #ff3C11;
+    background: #f1f1f1;
+}

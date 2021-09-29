@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "pages/pageA/pageA",
+    "pages/pageB/pageB"
+  ],
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

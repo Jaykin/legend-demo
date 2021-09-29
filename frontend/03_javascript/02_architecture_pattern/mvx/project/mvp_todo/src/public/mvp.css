@@ -1,0 +1,49 @@
+* {
+	box-sizing: border-box;
+	font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	padding: 30px;
+	background: #e9eaec;
+	-webkit-font-smoothing: antialiased;
+	font-size: 13px;
+	color: #666;
+}
+
+
+.done {
+	text-decoration: line-through;
+}
+
+input {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	height: 30px;
+	line-height: 30px;
+	width: 250px;
+	font-size: 20px;
+	padding: 4px;
+}
+
+button {
+	height: 30px;
+	margin-left: 4px;
+	width: 50px;
+	position: relative;
+	bottom: 3px;
+}
+
+h1 {
+	margin-bottom: 10px;
+}
+
+ul {
+	font-size: 20px;
+	margin-left: 30px;
+}

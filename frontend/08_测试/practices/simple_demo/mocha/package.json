@@ -1,0 +1,20 @@
+{
+  "name": "mocha-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "delay-test": "mocha --delay",
+    "test-report-dot-matrix": "mocha --reporter dot",
+    "test-report-nyan": "mocha --reporter nyan",
+    "test-report-progress": "mocha --reporter progress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #ccc;
+        }
+
+    </style>
+    <script src="./zepto.js"></script>
+</head>
+<body>
+
+<a href="/login" id="login">get请求 /login</a><br/>
+<a href="/goods" id="goods">post请求 /goods</a><br/>
+<a href="/chat" id="chat">put请求 /chat</a><br/>
+<a href="/go" id="go">delete请求 /go</a><br/>
+<br/>
+<div id="resShow">这是响应信息</div>
+<script>
+
+    var login = $('#login');
+    var goods = $('#goods');
+    var chat = $('#chat');
+    var go = $('#go');
+    var resShow = $('#resShow');
+
+    login.on('click', function (e) {
+        window.history.pushState(this.id, '', '/'+this.id)
+        $.ajax({
+            url:'/login',
+            type:'get',
+            success:function (data) {
+                resShow.html(data);
+            }
+        });
+        e.preventDefault();
+    });
+
+    goods.on('click', function (e) {
+        window.history.pushState(this.id, '', '/'+this.id)
+        $.ajax({
+            url:'/goods',
+            type:'post',
+            success:function (data) {
+                resShow.html(data);
+            }
+        });
+        e.preventDefault();
+    });
+
+    chat.on('click', function (e) {
+        window.history.pushState(this.id, '', '/'+this.id)
+        $.ajax({
+            url:'/chat',
+            type:'put',
+            success:function (data) {
+                resShow.html(data);
+            }
+        });
+        e.preventDefault();
+    });
+
+    go.on('click', function (e) {
+        window.history.pushState(this.id, '', '/'+this.id)
+        $.ajax({
+            url:'/go',
+            type:'delete',
+            success:function (data) {
+                resShow.html(data);
+            }
+        });
+        e.preventDefault();
+    });
+
+    window.onpopstate = function (e) {
+        console.log(e.state);
+    }
+
+//    window.onbeforeunload = function () {
+//        alert('确定离开页面吗？');
+//        return false;
+//    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{
+    "name": "be-installation-department-doc-sys",
+    "version": "0.0.1",
+    "description": "安装部资料管理项目，后端",
+    "main": "index.js",
+    "scripts": {
+        "test": "better-npm-run test",
+        "unit": "better-npm-run unit",
+        "test-server": "better-npm-run test-server",
+        "test-api": "better-npm-run test-api",
+        "stop": "better-npm-run stop",
+        "start": "better-npm-run start",
+        "dev": "better-npm-run dev",
+        "prod": "better-npm-run prod",
+        "deploy-a": "node ./task/index.js deploy -t",
+        "deploy-r": "node ./task/index.js deploy -r",
+        "coverage": "better-npm-run coverage"
+    },
+    "betterScripts": {
+        "dev": {
+            "command": "supervisor  -i node_modules,log ./app/app.js ",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        "test": {
+            "command": "mocha -w ./test/**/*.js",
+            "env": {
+                "NODE_ENV": "unittest"
+            }
+        },
+        "test-server": {
+            "command": "supervisor -i node_modules,log,test ./app/app.js",
+            "env": {
+                "NODE_ENV": "unittest"
+            }
+        },
+        "test-api": {
+            "command": "mocha -w ./test/api/**/*.js",
+            "env": {
+                "NODE_ENV": "unittest"
+            }
+        },
+        "unit": {
+            "command": "mocha -w ./test/unit/**/*.js",
+            "env": {
+                "NODE_ENV": "unittest"
+            }
+        },
+        "prod": {
+            "command": "pm2 start ./app/app.js --watch -n idcs ",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        },
+        "start": {
+            "command": "pm2 start ecosystem.config.js",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        },
+        "stop": {
+            "command": "pm2 stop idcs -f",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        },
+        "coverage": {
+            "command": "istanbul cover node_modules/mocha/bin/_mocha -- ./test/**/*.js",
+            "env": {
+                "NODE_ENV": "unittest"
+            }
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@192.168.1.205:hanruis/be-installation-department-doc-sys.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "commander": "^2.9.0",
+        "eslint": "^3.11.0",
+        "eslint-config-airbnb": "^13.0.0",
+        "eslint-plugin-import": "^2.2.0",
+        "eslint-plugin-jsx-a11y": "^2.2.3",
+        "eslint-plugin-react": "^6.7.1",
+        "gulp": "^3.9.1",
+        "md5": "^2.2.1",
+        "mocha": "^3.2.0",
+        "request": "^2.79.0"
+    },
+    "dependencies": {
+        "better-npm-run": "0.0.13",
+        "body-parser": "^1.15.2",
+        "compression": "^1.6.2",
+        "cors": "^2.8.1",
+        "del": "^2.2.2",
+        "express": "^4.14.0",
+        "jsonschema": "^1.1.0",
+        "jsonwebtoken": "^7.2.1",
+        "lodash": "^4.17.2",
+        "log4js": "^1.0.1",
+        "md5-file": "^3.1.1",
+        "mkdirp": "^0.5.1",
+        "multer": "^1.2.0",
+        "mysql": "^2.12.0",
+        "sequelize": "^3.27.0",
+        "serve-index": "^1.8.0"
+    },
+    "engines": {
+        "node": ">=4.0.0"
+    }
+}

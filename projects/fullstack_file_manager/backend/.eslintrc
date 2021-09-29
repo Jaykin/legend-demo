@@ -1,0 +1,44 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "node": true
+    },
+    "globals": {
+        "describe": true,
+        "it": true,
+        "expect":true,
+        "beforeEach":true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "rules": {
+        "indent": [2, 4],
+        // 防止webpack设置了resolve.alias的路径报错
+        // 无法resolve的modules，webpack打包时就会报错，所以这项可以关闭
+        "import/no-unresolved": 0,
+        "comma-dangle": [2, "only-multiline"],
+        // 允许object键值后有空格，否则对齐from关键字和等号会报错
+        "key-spacing": 0,
+        // 允许多个空格，否则对齐from关键字和等号会报错
+        "no-multi-spaces": 0,
+        // 允许代码中有console.log
+        "no-console": 0,
+        // 允许代码中有alert
+        "no-alert": 0,
+        // 允许简写代码，如：
+        // a && b()
+        // a ? b() : c()
+        "no-unused-expressions": [2, {
+            "allowShortCircuit": true,
+            "allowTernary": true
+        }],
+        // code max-len: 120, tabWidth: 2
+        "max-len": [2, 120, 2],
+        // 强制不使用分号
+        "semi": [2, "always"],
+        "no-tabs": "off",
+        "arrow-body-style": ["error", "always"],
+        "camelcase":"off"
+    }
+}

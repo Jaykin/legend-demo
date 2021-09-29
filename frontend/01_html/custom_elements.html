@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>自定义元素</title>
+        <style>
+            ul {
+                list-style: none;
+            }
+
+            custom-square {
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <h2>自治自定义元素 popup-info</h2>
+            <popup-info text="i" content="sssss" />
+        </section>
+
+        <section>
+            <h2>自定义内置元素 ul/expanding-list</h2>
+            <ul is="expanding-list">
+                <li>UK
+                    <ul>
+                        <li>Yorkshire
+                            <ul>
+                                <li>Leeds
+                                    <ul>
+                                        <li>Train station</li>
+                                        <li>Town hall</li>
+                                        <li>Headrow</li>
+                                    </ul>
+                                </li>
+                                <li>Bradford</li>
+                                <li>Hull</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>USA
+                    <ul>
+                        <li>California
+                            <ul>
+                                <li>Los Angeles</li>
+                                <li>San Francisco</li>
+                                <li>Berkeley</li>
+                            </ul>
+                        </li>
+                        <li>Nevada</li>
+                        <li>Oregon</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>自定义元素生命周期</h2>
+            <button class="add">Add custom-square to DOM</button>
+            <button class="update">Update attributes</button>
+            <button class="remove">Remove custom-square from DOM</button>
+        </section>
+        
+        <!-- 创建自定义元素 -->
+        <script>
+            // 1、自治自定义元素
+            class PopUpInfo extends HTMLElement {
+                constructor() {
+                    super();
+                    this.init();
+                }
+
+                // 初始化
+                init() {
+                    // 创建 shadow root
+                    const shadow = this.attachShadow({ mode: 'open' });
+
+                    // 获取元素属性 text content
+                    const textAttr = this.getAttribute('text');
+                    const contentAttr = this.getAttribute('content');
+
+                    // 创建子元素
+                    const wrapper = document.createElement('span');
+                    wrapper.setAttribute('class', 'wrapper');
+
+                    const icon = document.createElement('span');
+                    icon.setAttribute('class', 'icon');
+                    icon.textContent = textAttr || 'i';
+
+                    const info = document.createElement('span');
+                    info.setAttribute('class', 'info');
+                    info.textContent = contentAttr || 'popup content';
+
+                    // 创建样式元素
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .wrapper {
+                            position: relative;
+                        }
+
+                        .icon {
+                            font-size: 16px;
+                            border: 1px solid black;
+                            padding: 5px;
+                        }
+
+                        .info {
+                            font-size: 14px;
+                            width: 200px;
+                            display: inline-block;
+                            border: 1px solid black;
+                            padding: 10px;
+                            background: white;
+                            border-radius: 10px;
+                            opacity: 0;
+                            transition: 0.6s all;
+                            position: absolute;
+                            bottom: 20px;
+                            left: 10px;
+                            z-index: 3;
+                        }
+
+                        .icon:hover + .info {
+                            opacity: 1;
+                        }
+                    `;
+
+                    // 构建 DOM 树
+                    shadow.appendChild(style);
+                    shadow.appendChild(wrapper);
+                    wrapper.appendChild(icon);
+                    wrapper.appendChild(info);
+                }
+            }
+
+            window.customElements.define('popup-info', PopUpInfo);
+
+            // 2、自定义内置元素
+            class ExpandingList extends HTMLUListElement {
+                constructor() {
+                    super();
+                    this.init();
+                }
+
+                // 初始化
+                init() {
+                    // :root 根元素选择器
+                    const uls = Array.from(document.querySelectorAll(':root ul'));
+                    const lis = Array.from(document.querySelectorAll(':root li'));
+
+                    // DOM 处理
+                    uls.slice(1).forEach(ul => {
+                        ul.style.display = 'none';
+                    });
+                    lis.forEach(li => {
+                        const childText = li.childNodes[0];
+                        const newSpan = document.createElement('span');
+
+                        newSpan.textContent = childText.textContent;
+                        childText.parentNode.insertBefore(newSpan, childText);
+                        childText.parentNode.removeChild(childText);
+                    });
+
+                    const spans = Array.from(document.querySelectorAll(':root span'));
+                    spans.forEach(span => {
+                        if (span.nextElementSibling) {
+                            span.style.cursor = 'pointer';
+                            span.parentNode.setAttribute('class', 'closed');
+                            span.onclick = showul;
+                        }
+                    });
+
+                    function showul(e) {
+                        const nextul = e.target.nextElementSibling;
+
+                        if (nextul.style.display == 'block') {
+                            nextul.style.display = 'none';
+                            nextul.parentNode.setAttribute('class', 'closed');
+                        } else {
+                            nextul.style.display = 'block';
+                            nextul.parentNode.setAttribute('class', 'open');
+                        }
+                    }
+                }
+            }
+
+            window.customElements.define('expanding-list', ExpandingList, { extends: 'ul' });
+        </script>
+
+        <!-- 生命周期 -->
+        <script>
+            function updateStyle(elem) {
+                const shadow = elem.shadowRoot;
+                shadow.querySelector('style').textContent = `
+                    div {
+                        width: ${elem.getAttribute('l')}px;
+                        height: ${elem.getAttribute('l')}px;
+                        background-color: ${elem.getAttribute('c')};
+                    }
+                `;
+            }
+
+            class Square extends HTMLElement {
+                constructor() {
+                    super();
+
+                    const shadow = this.attachShadow({mode: 'open'});
+                    const div = document.createElement('div');
+                    const style = document.createElement('style');
+                    shadow.appendChild(style);
+                    shadow.appendChild(div);
+                }
+
+                // 定义需要观察的属性
+                static get observedAttributes() {
+                    return ['c', 'l'];
+                }
+
+                // 生命周期 - 连接时
+                connectedCallback() {
+                    console.log('自定义元素 square 被添加到页面');
+                    updateStyle(this);
+                }
+
+                // 生命周期 - 断开连接时
+                disconnectedCallback() {
+                    console.log('自定义元素 square 被移除');
+                }
+
+                // 生命周期 - 移动到新文档时
+                adoptedCallback() {
+                    console.log('自定义元素 square 被移动到新节点');
+                }
+
+                // 生命周期 - 属性变化时
+                attributeChangedCallback(name, oldValu, newVal) {
+                    console.log(`自定义元素 square 的属性 ${name} 由 ${oldValu} 变成 ${newVal}`);
+                    updateStyle(this);
+                }
+            }
+
+            window.customElements.define('custom-square', Square);
+
+            // 伪随机数生成
+            function random(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            // 绑定事件
+            const addDom = document.querySelector('.add');
+            const updateDom = document.querySelector('.update');
+            const removeDom = document.querySelector('.remove');
+            let square;
+
+            // 初始化
+            updateDom.disabled = true;
+            removeDom.disabled = true;
+            addDom.onclick = function () {
+                square = document.createElement('custom-square');
+                square.setAttribute('l', '100');
+                square.setAttribute('c', 'red');
+                document.body.appendChild(square);
+
+                updateDom.disabled = false;
+                removeDom.disabled = false;
+                addDom.disabled = true;
+            };
+            updateDom.onclick = function () {
+                square.setAttribute('l', random(50, 200));
+                square.setAttribute('c', `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`);
+            };
+            removeDom.onclick = function () {
+                document.body.removeChild(square);
+                updateDom.disabled = true;
+                removeDom.disabled = true;
+                addDom.disabled = false;
+            };
+            
+        </script>
+    </body>
+</html>

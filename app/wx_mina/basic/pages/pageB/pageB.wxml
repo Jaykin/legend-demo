@@ -1,0 +1,8 @@
+<view>
+    PageB
+    <cmp-a prop="{{ {a: 1} }}">
+        <cmp-b prop="{{ {b: 2} }}">
+            <cmp-c prop="{{ {c: 3} }}"></cmp-c>
+        </cmp-b>
+    </cmp-a>
+</view>

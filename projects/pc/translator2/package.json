@@ -1,0 +1,38 @@
+{
+  "name": "translater",
+  "version": "1.0.0",
+  "description": "学习nw.js",
+  "main": "index.html",
+  "scripts": {
+    "dist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://npm.taobao.org/mirrors/nwjs .",
+    "start": "run --x64 --mirror https://npm.taobao.org/mirrors/nwjs .",
+    "build-mac": "build --tasks mac-x64 --mirror https://npm.taobao.org/mirrors/nwjs .",
+    "build-win-mac": "build --tasks win-x86,win-x64,mac-x64 --mirror https://npm.taobao.org/mirrors/nwjs .",
+    "build-win": "build --tasks win-x86,win-x64 --mirror https://npm.taobao.org/mirrors/nwjs ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaykin/nwjs-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaykin/nwjs-demo/issues"
+  },
+  "homepage": "https://github.com/Jaykin/nwjs-demo#readme",
+  "build": {
+    "nwVersion": "0.39.0"
+  },
+  "devDependencies": {
+    "nwjs-builder-phoenix": "^1.15.0"
+  },
+  "dependencies": {
+    "superagent": "^4.1.0"
+  },
+  "window": {
+    "width": 100,
+    "height": 140,
+    "always_on_top": true
+  }
+}

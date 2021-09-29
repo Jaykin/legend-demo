@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="macro">执行宏命令</button>
+
+<script>
+    /**
+     * 宏命令 macro
+     * */
+
+    var closeDoorCommand = {
+        execute: function () {
+            console.log('关门');
+        }
+    }
+
+    var openPcCommand = {
+        execute: function () {
+            console.log('开电脑');
+        }
+    }
+
+    var openQQCommand = {
+        execute: function () {
+            console.log('打开QQ');
+        }
+    }
+
+    var MacroCommand = function () {
+        return {
+            commandList: [],
+
+            add: function (array) {
+                var type = typeof array;
+                var cmdList = this.commandList;
+
+                if (Array.isArray(array)) {
+                    this.commandList = cmdList.concat(array);
+                } else if (type === 'object') {
+                    cmdList.push(array);
+                }
+
+                return this;
+            },
+
+            execute: function () {
+                var cmdList = this.commandList;
+
+                for (var i = 0, cmd; cmd = cmdList[i++]; ) {
+                    cmd.execute();
+                }
+            }
+        }
+    }
+
+
+    document.getElementById('macro').onclick = function () {
+        var macroCommand = MacroCommand();
+        macroCommand.add([closeDoorCommand, openPcCommand, openQQCommand]).execute();
+    }
+
+</script>
+</body>
+</html>

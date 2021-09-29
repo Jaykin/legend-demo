@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .outer {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            background-color: grey;
+        }
+
+        .inner {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+    <p>ddd</p>
+
+    <script>
+        var outer = document.querySelector('.outer');
+        var inner = document.querySelector('.inner');
+
+        var sleep = function (ms) {
+            var sTime = +new Date;
+            while (+new Date < sTime + ms) {
+
+            }
+        }
+
+        // DOM 变动观察器
+        new MutationObserver(function() {
+            console.log('DOM Mutated', +new Date);
+            // sleep(2000)
+        }).observe(outer, {
+            attributes: true
+        });
+
+        // Here's a click listener…
+        function onClick() {
+            console.log('click envent', +new Date);
+
+            setTimeout(function() {
+                sleep(2000)
+                console.log('timeout task', +new Date);
+                console.log('timeout task get UI', outer.dataset['random']);
+            }, 0);
+
+            Promise.resolve().then(function() {
+                console.log('promise task', +new Date);
+                console.log('promise task get UI', outer.dataset['random']);
+                // sleep(2000)
+            });
+
+            outer.setAttribute('data-random', +new Date);
+            outer.style.backgroundColor = 'red';     // 页面展示会延迟
+            // [1,2,3,4,5,6,7,8,9].forEach((it) => {
+            //     inner.innerHTML = it
+            // })
+            
+        }
+
+        inner.addEventListener('click', onClick);
+        outer.addEventListener('click', onClick);
+
+        // 宏任务
+        // sleep(3000)
+        // console.log('start')
+
+        // 微任务
+        // Promise.resolve().then(function() {
+        //     sleep(3000);
+        //     console.log('start');
+        // });
+    </script>
+</body>
+</html>

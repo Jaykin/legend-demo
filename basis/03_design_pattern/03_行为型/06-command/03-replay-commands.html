@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="margin: 0">
+    <button id="replay">重放</button>
+    <div style="position: relative;">
+        <div id="ball" style="position:absolute;background:#000;width:50px;height:50px"></div>
+    </div>
+
+    <script src="../02-strategy/02-animate.js"></script>
+    <script>
+        /**
+         * 撤销多步功能（需要命令缓存队列-先进先出）
+         *
+         * */
+        // 接收方
+        var Actions = (function () {
+            var ball = document.getElementById('ball');
+            var animate = new Animate(ball);
+
+            return {
+                attack: function () {
+                    console.log('攻击');
+                    animate.start('left', 200, 1500, 'linear');
+                },
+
+                defense: function () {
+                    console.log('防御');
+                    animate.start('left', 400, 1500, 'linear');
+                },
+
+                jump: function () {
+                    console.log('跳跃');
+                    animate.start('top', 400, 1500, 'linear');
+                },
+
+                crouch: function () {
+                    console.log('蹲下');
+                    animate.start('top', 200, 1500, 'linear');
+                }
+            }
+        })();
+
+        // 创建命令
+        var makeCommand = function (receive, state) {
+            var ret = receive[state];
+
+            if (!ret) {
+                return null;
+            }
+
+            return {
+                execute: function () {
+                    ret();
+                }
+            }
+        }
+
+        var commandsQueue = [];     // 存储命令
+
+        // 请求方
+        var commandsMap = {
+            "119": "jump",      // W
+            "115": "crouch",    // S
+            "97": "defense",    // A
+            "100": "attack"     // D
+        }
+
+        document.onkeypress = function (e) {
+            var keyCode = e.keyCode;
+            var command = makeCommand(Actions, commandsMap[keyCode]);
+
+            if (command) {
+                command.execute();
+                commandsQueue.push(command);
+            }
+        }
+
+        document.getElementById('replay').onclick = function () {
+            var command;
+
+            while (command = commandsQueue.shift()) {
+                command.execute();
+            }
+        }
+
+
+    </script>
+</body>
+</html>

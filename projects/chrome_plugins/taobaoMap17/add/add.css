@@ -1,0 +1,24 @@
+body {
+    padding: 20px;
+}
+
+.ui.header.add-header {
+    margin-top: 10px;
+}
+
+.goods-image {
+    width: 100px;
+}
+
+.ui.table thead,
+.ui.table tbody {
+    text-align: center;
+}
+
+.content.mapper-modal-content {
+    text-align: center;
+}
+
+.ui.input.mapper-modal-input {
+    width: 60%;
+}

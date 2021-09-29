@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "sequelize": "registry:dt/sequelize#3.4.1+20160929080558"
+  },
+  "dependencies": {
+    "jsonwebtoken": "registry:dt/jsonwebtoken#7.1.6+20161128184045"
+  }
+}

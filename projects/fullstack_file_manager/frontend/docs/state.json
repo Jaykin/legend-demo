@@ -1,0 +1,49 @@
+{
+  // 应用state结构: 分为四个域(四张表)
+  "global": {
+    "sider": {
+      "subMenus": [
+        { "key": "sub1", "item": "汽修资料库" },
+        { "key": "sub2", "item": "测试001" },
+        { "key": "sub3", "item": "测试001" }
+      ],
+      "links": {
+        "sub1": [
+          { "route": "/datalist", "item": "汽修资料列表" },
+          { "route": "/typemanage", "item": "类型管理" },
+          { "route": "/secmanage", "item": "板块管理" }
+        ],
+        "sub2": [
+          { "route": "/datalist", "item": "测试001-1" },
+          { "route": "/typemanage", "item": "测试001-2" },
+          { "route": "/secmanage", "item": "测试001-3" }
+        ],
+        "sub3": [
+          { "route": "/datalist", "item": "测试002-1" },
+          { "route": "/typemanage", "item": "测试002-2" },
+          { "route": "/secmanage", "item": "测试002-3" }
+        ]
+      }
+    },
+
+    "status": {
+      "fileUploadCompleted": true
+    }
+  },
+
+  "datalist": {
+
+  },
+
+  "fileUpload": {
+
+  },
+
+  "typeManage": {
+
+  },
+
+  "secManage": {
+
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="../assets/semantic.css">
+        <link rel="stylesheet" href="../assets/common.css">
+        <link rel="stylesheet" href="show.css">
+        <title>查询商品</title>
+    </head>
+    <body>
+        <h2 class="ui header show-header">
+            <img src="../assets/images/icons.png">
+            <div class="content">
+                查询商品数据
+                <div class="sub header">查询17网商品与上传至淘宝的商品的映射信息</div>
+            </div>
+        </h2>
+
+        <!-- 商品数据 -->
+        <table id="showDataTable" class="ui celled table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品ID</th>
+                    <th>商品来源</th>
+                    <th>商品主图</th>
+                    <th>关键词</th>
+                    <th>批发价</th>
+                    <th>淘宝价</th>
+                    <th>库存</th>
+                    <th>上架时间</th>
+                    <th>商品链接</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <script src="../assets/jquery.js"></script>
+        <script src="../assets/semantic.js"></script>
+        <script src="../assets/common.js"></script>
+        <script src="../assets/indexedDB.js"></script>
+        <script src="show.js"></script>
+    </body>
+</html>

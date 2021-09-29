@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>test</title>
+    <style>
+        .title {
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .status {
+            font-size: 12px;
+            text-align: center;
+            color: gray;
+        }
+        
+        .inputWrap {
+            margin: 0 20px;
+        }
+
+        .input {
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 25px;
+            border-radius: 2px;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            height: 30px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="title">Web Side</p>
+    <p class="status">[Loading] Waiting...</p>
+    <div class="inputWrap"><input class="input" type="text" placeholder="Some..." /></div>
+    <button class="set" label="Send To RN">Send To RN</button>
+    <button class="get" label="Get From RN">Get From RN</button>
+    <button class="call" label="Call RN">Call RN</button>
+    
+    <script type="application/javascript">
+        (function () {
+            var $input = document.querySelector('.input');
+            var $status = document.querySelector('.status');
+
+            function changeStatus(text) {
+                $status.innerText = text
+            }
+
+            // 检测wenview是否加载正常
+            if (window.postMessage) {
+                changeStatus('[success] Loaded Success...')
+            } else {
+                changeStatus('[error] postMessage is not a function!');
+                return;
+            }
+
+            // receive from RN
+            window.document.addEventListener('message', function (e) {
+                var protocolData = JSON.parse(e.data);
+                var command = protocolData.command;
+
+                if (command === 'receive') {
+                    window.postMessage(JSON.stringify({
+                        command: 'send',
+                        payload: $input.value || 'This is Web！'
+                    }));
+                } else if (command === 'send') {
+                    changeStatus('[Receive From RN] ' + protocolData.payload)
+                } else if (command === 'call') {
+                    $input.value = 'Changed From RN side'
+                }
+            })
+
+            // send to RN
+            document.querySelector('.set').addEventListener('click', function () {
+                var message = $input.value || 'This is Web！';
+
+                changeStatus('[Send To RN] ' + message);
+                window.postMessage(JSON.stringify({
+                    command: 'send',
+                    payload: message
+                }));
+            })
+
+            // get from RN
+            document.querySelector('.get').addEventListener('click', function () {
+                window.postMessage(JSON.stringify({
+                    command: 'receive'
+                }));
+            })
+
+            // call RN
+            document.querySelector('.call').addEventListener('click', function () {
+                window.postMessage(JSON.stringify({
+                    command: 'call'
+                }));
+            })
+        })()
+    </script>
+
+    <!-- <script src="https://cdn.bootcss.com/es6-promise/4.0.5/es6-promise.auto.min.js"></script> -->
+    <!-- <script src="https://tb1.bdstatic.com/tb/libs/rnwi-browser.js"></script> -->
+    <!-- DEV
+    <script src="http://localhost:8080/browser.js"></script>
+    -->
+    <!-- <script>
+        (function () {
+            var $input = document.querySelector('.input')
+            var $status = document.querySelector('.status')
+            
+            // var getFromNative = window.WebViewInvoke.bind('get')
+            // var setToNative = window.WebViewInvoke.bind('set')
+            // var webReady = window.WebViewInvoke.bind('init')
+
+            function nativeWannaGet() {
+                return $input.value
+            }
+
+            function nativeWannaSet(data) {
+                $status.innerText = '[Receive From RN] "' + data + '"'
+            }
+
+            // window.WebViewInvoke.define('get', nativeWannaGet)
+            // window.WebViewInvoke.define('set', nativeWannaSet)
+
+            // webReady().then(function() {
+            //     $status.innerText = '[Ready] Done!'
+            // })
+
+            document.querySelector('.set').addEventListener('click', function(){
+                $status.innerText = '[Set To RN] Sending'
+                setToNative($input.value)
+                    .then(function () {
+                        $status.innerText = '[Set To RN] Success'
+                    })
+            })
+
+            document.querySelector('.get').addEventListener('click', function(){
+                getFromNative()
+                    .then(function (data) {
+                        $status.innerText = '[Get From RN] "' + data + '"'
+                    })
+            })
+        })()
+    </script> -->
+</body>
+</html>

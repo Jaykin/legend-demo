@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    window.onload = function () {
+        console.log('window loaded');
+    }
+
+    document.on
+</script>
+<!--结论：JS动态脚本异步加载，同步执行-->
+<!--<script src="./main.js" id="main"></script>-->
+<!--<script src="./a.js" id="a"></script>-->
+<script id="inlineScript">
+    console.log('script start');
+    console.dir(document.currentScript);
+    var mainJSDom = document.createElement('script');
+    var aJSDom = document.createElement('script');
+    var headerDom = document.head;
+    mainJSDom.setAttribute('src', './main.js');
+    mainJSDom.setAttribute('id', 'main');
+
+    aJSDom.setAttribute('src', './a.js');
+    aJSDom.setAttribute('id', 'a');
+
+    headerDom.appendChild(mainJSDom);
+    headerDom.appendChild(aJSDom);
+
+    mainJSDom.onload = function () {
+        console.log('main.js loaded');
+    }
+
+    aJSDom.onload = function () {
+        console.log('a.js loaded');
+    }
+
+    setTimeout(function () {
+        console.log('script timeout over');
+    }, 500);
+
+//    console.time('xh');
+//    for(var i = 0; i < 10000000; i++) {
+//        if (i === 9999999) {
+//            console.log('script 循环结束');
+//        }
+//    }
+//    console.timeEnd('xh');
+</script>
+<script>
+    console.log('other script');
+</script>
+</body>
+</html>

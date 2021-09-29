@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--配置项脚本在require.js之前-->
+
+<script>
+    // 设置依赖项
+    var require = {
+        deps: ['moduleA'],
+        callback: function (moduleA) {
+            console.log('inline config holding');
+            console.dir(moduleA);
+        }
+    }
+</script>
+<script src="../libs/require.js"></script>
+</body>
+</html>

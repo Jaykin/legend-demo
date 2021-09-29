@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_slot</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <slot-box1>
+            <template v-slot:default="{ a: childA }">
+                <div>Default {{ childA ? childA : a }}</div>
+            </template>
+            <template v-slot:header>
+                <div>Header</div>
+            </template>
+            <template v-slot:main>
+                <div>Main</div>
+            </template>
+            <template v-slot:footer>
+                <div>Footer</div>
+            </template>
+        </slot-box1>
+    </div>
+
+    <script>
+        Vue.component('slot-box1', {
+            template: `
+                <div class="slot-box1" :attr-a="a">
+                    <slot name="default" v-bind:a="a">default 的后备内容</slot>
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <main>
+                        <slot name="main"></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>`,
+            data() {
+                return {
+                    a: 1
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                a: 2
+            }
+        });
+    </script>
+</body>
+</html>

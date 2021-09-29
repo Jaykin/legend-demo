@@ -1,0 +1,4 @@
+{
+    "deployPath":"E:/new_product/installation_project/SVN/garageDoc/backend",
+    "files":["app/**", "ecosystem.config.js", "package.json", "!app/public/"]
+}

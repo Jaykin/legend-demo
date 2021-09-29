@@ -1,0 +1,4 @@
+<view>
+    cmpA
+    <slot></slot>
+</view>   

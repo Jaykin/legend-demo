@@ -1,0 +1,10 @@
+
+.ids-position-main {
+    position: relative;
+    height: 40px;
+    font-size: 15px;
+}
+
+.ids-position-item {
+    display:inline-block;
+}

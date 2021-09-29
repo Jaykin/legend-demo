@@ -1,0 +1,57 @@
+.file-upload-wrap {
+    .file-upload-head {
+        position: absolute;
+        right: 40px;
+        top: 0;
+        font-size: 14px;
+    }
+
+    .file-upload-setting {
+        margin-right: 20px;
+    }
+
+    // 文件选择start
+    .webuploader-container {
+        display:inline-block;
+        position: relative;
+        vertical-align: middle;
+        font-size: 12px;
+    }
+
+    .webuploader-pick {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        background: #57c5f7;
+        padding: 5px 15px;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .webuploader-element-invisible {
+        position: absolute !important;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px, 1px, 1px, 1px);
+    }
+    // 文件选择end
+
+    .file-upload-badge-wrap {
+        margin-top: -44px;
+    }
+
+    .file-upload-badge .ant-badge-count {
+        z-index: 666;
+        background-color: #fff;
+        color: #57c5f7;
+        border: 1px solid #57c5f7;
+        margin-top: -30px;
+        margin-right: -10px;
+    }
+
+    // 文件筛选
+    .ant-dropdown-menu-item {
+        text-align: center;
+    }
+}

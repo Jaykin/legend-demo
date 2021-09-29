@@ -1,0 +1,45 @@
+.ant-select.ids-car-cascade-selector {
+    width: auto;
+    min-width: 58px;
+    max-width: 135px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.ids-brand-dropdown {
+    width: 400px;
+}
+
+.ids-brand-dropdown .ant-select-dropdown-menu {
+    max-height: 500px;
+}
+
+.ids-line-model-dropdown {
+    width: 200px;
+}
+.ids-line-model-dropdown .ant-select-dropdown-menu {
+    max-height: 500px;
+}
+
+.ids-car-cascade-wrap {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.ant-form-inline .ids-car-cascade-wrap .ant-form-item {
+    margin-right: 0;
+    vertical-align: middle;
+}
+
+.ant-select-dropdown-menu-item-group > .ant-select-dropdown-menu-item-group-list > .ant-select-dropdown-menu-item {
+    display:inline-block;
+    padding:7px 16px;
+    margin-right: 5px;
+}
+.ant-select-dropdown-menu-item-group .ant-select-dropdown-menu-item {
+    background-color: #F2F2F0;
+}
+.ant-select-dropdown-menu-item-group .ant-select-dropdown-menu-item-selected,
+.ant-select-dropdown-menu-item-group .ant-select-dropdown-menu-item-selected:hover {
+    background-color: #f7f7f7;
+}

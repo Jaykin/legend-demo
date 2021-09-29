@@ -1,0 +1,23 @@
+{
+  "name": "rxjs-demo",
+  "version": "1.0.0",
+  "description": "学习Rx.js相关",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaykin/rxjs-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaykin/rxjs-demo/issues"
+  },
+  "homepage": "https://github.com/Jaykin/rxjs-demo#readme",
+  "dependencies": {
+    "rxjs": "^5.5.5"
+  }
+}

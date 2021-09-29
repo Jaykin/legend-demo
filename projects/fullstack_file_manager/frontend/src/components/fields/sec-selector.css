@@ -1,0 +1,7 @@
+.ids-sec-selector {
+    max-width: 120px;
+}
+
+.ids-sec-dropdown .ant-select-dropdown-menu {
+    max-width: 200px;
+}
