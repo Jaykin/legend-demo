@@ -1,2 +1,0 @@
-- 优秀的代码片段收集
-- https://30secondsofcode.org/
