@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 开发环境 -->
+    <beans profile="dev">
+        <bean id="role" class="com.jay.profile.RoleDev">
+            <property name="roleName" value="[dev] Java 工程师"/>
+            <property name="note" value="研发人员"/>
+        </bean>
+    </beans>
+
+    <!-- 测试环境 -->
+    <beans profile="test">
+        <bean id="role" class="com.jay.profile.RoleTest">
+            <property name="roleName" value="[test] Java 工程师"/>
+            <property name="note" value="研发人员"/>
+        </bean>
+    </beans>
+</beans>

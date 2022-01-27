@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jay.mapper.EmployeeTaskMapper">
+    <!-- 定义结果集映射规则 -->
+    <resultMap id="EmployeeTaskMap" type="com.jay.entity.EmployeeTask">
+        <id column="id" property="id" />
+        <result column="emp_id" property="empId" />
+        <result column="task_name" property="taskName" />
+        <result column="note" property="note" />
+
+        <!-- 级联查询(一对一) - 根据【任务ID】查询任务详情 -->
+        <association column="task_id" property="task"
+            select="com.jay.mapper.TaskMapper.getTask" />
+    </resultMap>
+
+    <select id="getEmployeeTaskByEmpid" parameterType="long" resultMap="EmployeeTaskMap">
+        select * from employee_task where emp_id = #{empId}
+    </select>
+</mapper>

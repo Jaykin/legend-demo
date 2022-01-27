@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis 全局配置（配置项有顺序要求的） -->
+<configuration>
+    <!-- properties 属性 -->
+    <properties resource="config/dev.properties">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/demo"/>
+    </properties>
+
+    <!-- settings 设置（运行时） -->
+    <settings>
+        <!-- 下划线分隔转驼峰 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 指定 MyBatis 所用日志的具体实现，未指定时将自动查找 -->
+        <setting name="logImpl" value="SLF4J"/>
+
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="aggressiveLazyLoading" value="false" />
+    </settings>
+
+    <environments default="development">
+        <!-- 2、开发环境 -->
+        <environment id="development">
+            <!-- 1.1、TransactionManager：决定事务作用域和控制方式的事务管理器 -->
+            <transactionManager type="JDBC"/>
+
+            <!-- 1.2、DataSource：获取数据库连接实例的数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 3、映射文件 -->
+    <mappers>
+        <!--<package name="com.jay.mapper" />-->
+
+        <mapper resource="mapper/UserMapper.xml" />
+        <mapper resource="mapper/EmployeeMapper.xml" />
+        <mapper resource="mapper/EmployeeTaskMapper.xml" />
+        <mapper resource="mapper/FemaleHealthFormMapper.xml" />
+        <mapper resource="mapper/MaleHealthFormMapper.xml" />
+        <mapper resource="mapper/TaskMapper.xml" />
+        <mapper resource="mapper/WorkCardMapper.xml" />
+    </mappers>
+</configuration>

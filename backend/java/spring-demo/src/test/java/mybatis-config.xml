@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis 全局配置（配置项有顺序要求的） -->
+<configuration>
+    <!-- settings 设置（运行时） -->
+    <settings>
+        <!-- 下划线分隔转驼峰 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 指定 MyBatis 所用日志的具体实现，未指定时将自动查找 -->
+        <setting name="logImpl" value="SLF4J"/>
+
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="aggressiveLazyLoading" value="false" />
+
+        <!-- 开启缓存 -->
+        <setting name="cacheEnabled" value="true" />
+
+        <!-- 等待数据库响应的超时时间 -->
+        <setting name="defaultStatementTimeout" value="25000" />
+    </settings>
+
+    <!-- 映射文件 -->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml" />
+    </mappers>
+</configuration>

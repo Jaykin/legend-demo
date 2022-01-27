@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jay.mapper.EmployeeMapper">
+    <!-- 开启二级缓存 -->
+    <cache />
+
+    <!-- 雇员结果集映射 -->
+    <resultMap id="EmployeeMap" type="com.jay.entity.Employee">
+        <id column="id" property="id" />
+        <result column="real_name" property="realName" />
+        <result column="birthday" property="birthday" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="position" property="position" />
+        <result column="note" property="note" />
+
+        <!-- 枚举类的转换 -->
+        <!--<result column="sex" property="sex" typeHandler="com.jay.mapper.typeHandler.SexTypeHandler" />-->
+        <!--<result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumTypeHandler" />-->
+        <result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+
+        <!-- 级联查询(一对一) - 根据【雇员ID】查询【工牌信息】 -->
+        <association column="id" property="workCard"
+            select="com.jay.mapper.WorkCardMapper.getWorkCardByEmpid" />
+
+        <!-- 级联查询(一对多) - 根据【雇员ID】查询【任务列表】 -->
+        <collection column="id" property="employeeTaskList"
+            select="com.jay.mapper.EmployeeTaskMapper.getEmployeeTaskByEmpid" />
+
+        <!-- 级联查询(按条件) - 根据【雇员性别】分别查询【体检表】 -->
+        <discriminator column="sex" javaType="byte">
+            <case value="0" resultMap="FemaleHealthFormMapper" />
+            <case value="1" resultMap="MaleHealthFormMapper" />
+        </discriminator>
+    </resultMap>
+
+    <!-- 女性雇员结果集映射 -->
+    <resultMap id="FemaleHealthFormMapper" type="com.jay.entity.FemaleEmployee" extends="EmployeeMap">
+        <!-- 级联查询(一对一) - 根据【雇员ID】查询【女性体检表】 -->
+        <association column="id" property="femaleHealthForm"
+                     select="com.jay.mapper.FemaleHealthFormMapper.getFemaleHealthForm" />
+    </resultMap>
+
+    <!-- 男性雇员结果集映射 -->
+    <resultMap id="MaleHealthFormMapper" type="com.jay.entity.MaleEmployee" extends="EmployeeMap">
+        <!-- 级联查询(一对一) - 根据【雇员ID】查询【男性体检表】 -->
+        <association column="id" property="maleHealthForm"
+                     select="com.jay.mapper.MaleHealthFormMapper.getMaleHealthForm" />
+    </resultMap>
+
+    <select id="getEmployee" parameterType="long" resultMap="EmployeeMap">
+        select * from employee where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jay.mapper.WorkCardMapper">
+    <select id="getWorkCardByEmpid" parameterType="long" resultType="com.jay.entity.WorkCard">
+        select * from work_card where emp_id = #{empId}
+    </select>
+</mapper>

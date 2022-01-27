@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注入方式 - 构造器注入 -->
+    <bean id="role01" class="com.jay.di.xml.Role">
+        <!-- 构造函数入参 -->
+        <constructor-arg index="0" value="总经理"/>
+        <constructor-arg index="1" value="公司管理者"/>
+    </bean>
+
+    <!-- 注入方式 - setter注入 -->
+    <bean id="role02" class="com.jay.di.xml.Role">
+        <property name="roleName" value="Java 工程师"/>
+        <property name="note" value="研发人员"/>
+    </bean>
+
+    <!-- 注入方式 - 接口注入 -->
+    <!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+    <!--    <property name="jndiName" value="java:comp//env/jdbc/ssm"/>-->
+    <!--</bean>-->
+
+    <!-- 装配：集合 -->
+    <bean id="complexAssembly" class="com.jay.di.xml.ComplexAssembly">
+        <property name="id" value="1" />
+        <!-- List -->
+        <property name="list">
+            <list>
+                <value>value-list-01</value>
+                <value>value-list-02</value>
+                <value>value-list-03</value>
+
+                <!-- 引用 -->
+                <!--<ref bean="refBeanId"></ref>-->
+            </list>
+        </property>
+        <!-- Map -->
+        <property name="map">
+            <map>
+                <entry key="key01" value="value-map-01" />
+                <entry key="key02" value="value-map-02" />
+                <entry key="key03" value="value-map-03" />
+
+                <!-- 引用 -->
+                <!--<entry key-ref="refBeanId" value-ref="refBeanId" />-->
+            </map>
+        </property>
+        <!-- Set -->
+        <property name="set">
+            <set>
+                <value>value-set-01</value>
+                <value>value-set-02</value>
+                <value>value-set-03</value>
+
+                <!-- 引用 -->
+                <!--<ref bean="refBeanId"></ref>-->
+            </set>
+        </property>
+        <!-- Array -->
+        <property name="array">
+            <array>
+                <value>value-array-01</value>
+                <value>value-array-02</value>
+                <value>value-array-03</value>
+            </array>
+        </property>
+        <property name="props">
+            <props>
+                <prop key="prop01">value-prop-01</prop>
+                <prop key="prop02">value-prop-02</prop>
+                <prop key="prop03">value-prop-03</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
