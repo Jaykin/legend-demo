@@ -10,4 +10,10 @@ public class Timer {
     public long duration() {
         return System.currentTimeMillis() - startTime;
     }
+
+    public long duration(String msg) {
+        long duration = System.currentTimeMillis() - startTime;
+        System.out.println(msg + duration);
+        return duration;
+    }
 }

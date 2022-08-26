@@ -19,7 +19,22 @@
     </bean>
 
     <!-- 数据库模板模式：jdbcTemplate -->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+    <!--    <property name="dataSource" ref="dataSource" />-->
+    <!--</bean>-->
+
+    <!-- 配置 Bean: mybatis SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 1、设置数据源 -->
         <property name="dataSource" ref="dataSource" />
+        <!-- 2、设置 mybatis 配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+    </bean>
+
+    <!-- 配置 Bean: SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+        <!-- mybatis 执行器类型 -->
+        <constructor-arg value="BATCH" />
     </bean>
 </beans>

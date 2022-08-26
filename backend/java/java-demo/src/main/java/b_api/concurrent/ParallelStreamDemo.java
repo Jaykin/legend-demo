@@ -14,9 +14,9 @@ import helper.*;
  * */
 public class ParallelStreamDemo {
     public static void main(String[] args) throws IOException {
-        // demo01();
+        demo01();
         // demo02();
-        demo03();
+        // demo03();
     }
 
     public static boolean isPrime(long n) {
@@ -41,7 +41,7 @@ public class ParallelStreamDemo {
         // 素数
         List<String> primes = Stream.iterate(2, i -> i + 1)
                 .parallel()
-                // .peek(e -> System.out.println(e+ ": " + Thread.currentThread()))
+                .peek(e -> System.out.println(e+ ": " + Thread.currentThread()))
                 .filter(ParallelStreamDemo::isPrime)
                 .limit(100_000)
                 .map(Long::toString)
