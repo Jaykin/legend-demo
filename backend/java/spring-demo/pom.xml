@@ -13,7 +13,7 @@
         <maven.compiler.target>11</maven.compiler.target>
 
         <!-- Spring 版本 -->
-        <spring.version>5.3.19</spring.version>
+        <spring.version>5.3.20</spring.version>
     </properties>
 
     <dependencies>
